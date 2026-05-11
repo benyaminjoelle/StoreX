@@ -12,11 +12,7 @@ class LoginOnboardingHeader extends StatelessWidget {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
-         IconButton(
-                onPressed: () => Get.back(),
-                icon: Icon(Icons.arrow_back_ios_new, color: colors.primary),
-              ),
-
+        
               const SizedBox(height: 10),
         Text(
           "StoreX",
@@ -30,14 +26,7 @@ class LoginOnboardingHeader extends StatelessWidget {
         const SizedBox(height: 6),
 
         Text(
-          "Welcome to your control center",
-          style: theme.textTheme.titleMedium,
-        ),
-
-        const SizedBox(height: 6),
-
-        Text(
-          "Select your role to continue",
+          "Welcome Back!",
           style: theme.textTheme.bodyMedium?.copyWith(
             color: colors.onSurface.withOpacity(0.6),
           ),

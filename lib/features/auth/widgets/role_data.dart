@@ -14,7 +14,7 @@ class RoleModel {
   });
 }
 
-/// 🎯 Centralized role data (clean + reusable)
+/// Centralized role data (clean + reusable)
 List<RoleModel> getRoles(ColorScheme colors) {
   return [
     RoleModel(
@@ -24,7 +24,7 @@ List<RoleModel> getRoles(ColorScheme colors) {
       color: colors.primary,
     ),
     RoleModel(
-      title: "Business Owner",
+      title: "Business / SuperMarket Owner",
       description: "Track performance & analytics",
       icon: Icons.business,
       color: colors.secondary,

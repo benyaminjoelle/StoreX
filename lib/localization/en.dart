@@ -8,6 +8,7 @@ const Map<String, String> en = {
 
   //D
   //E
+    'Email':'Email',
   //F
     "Fast Logistics": "Fast Logistics",
   //G
@@ -22,9 +23,21 @@ const Map<String, String> en = {
   //M
   //N
   //O
+    'Only letters are allowed':'Only letters are allowed',
     "Optimize shipping routes automatically.":"Optimize shipping routes automatically.",
 
   //P
+  'Passwords do not match':'',
+   'Password must be at least 8 characters long':'Password must be at least 8 characters long',
+   'Please confirm your password':'Please confirm your password',
+   'Please enter a valid email address':'Please enter a valid email address',
+   'Please Enter Phone Number': 'Please Enter Phone Number',
+   'Please Enter The Password':'Please Enter The Password',
+   'Please Enter Your Name':'Please Enter Your Name',
+   'Please upload your ID photo':'Please upload your ID photo',
+   'Phone number must contain only digits':'Phone number must contain only digits',
+   'Phone number must start with 09':'Phone number must start with 09',
+
   //Q
   //R
   //S
@@ -42,6 +55,7 @@ const Map<String, String> en = {
   //W
   //X
   //Y
+    'You must be at least 18 years old':'You must be at least 18 years old',
     "Your data protected with layered security.":"Your data protected with layered security.",
     "Your choice for a smart warehouse":"Your choice for a smart warehouse",
 
