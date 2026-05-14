@@ -8,7 +8,8 @@ const Map<String, String> en = {
 
   //D
   //E
-    'Email Address':'Email Address',
+    'Email Address/Phone number':'Email Address/Phone number',
+    'Enter Email or Phone number':'Enter Email or Phone number',
     'Enter your password':'Enter your password',
   //F
     'Forgot Password?':'Forgot Password?',

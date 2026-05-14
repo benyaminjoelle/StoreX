@@ -6,7 +6,8 @@ const Map<String, String> ar = {
    'Create account': 'إنشاء حساب',
   //D
   //E
-   'Email Address':'البريد الالكتروني',
+   'Email Address/Phone number':'البريد الالكتروني/رقم الهاتف',
+   'Enter Email or Phone number':'ادخل البريد الالكتروني أو رقم الهاتف',
    'Enter your password':'ادخل كلمة المرور',
   //F
    'Forgot Password?':'هل نسيت كلمة المرور؟',
