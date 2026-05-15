@@ -8,16 +8,22 @@ class CustomBackButton extends StatelessWidget {
   Widget build(BuildContext context) {
     final media = MediaQuery.of(context);
     final theme = Theme.of(context);
-    return Positioned(
-      top: media.padding.top + 5,
-      left: 10,
-      child: IconButton(
-        icon: Icon(
-          Icons.arrow_back_ios_new_rounded,
-          color: theme.colorScheme.onSurface,
-          size: 23,
+
+    return Padding(
+      padding: EdgeInsets.only(
+        top: media.padding.top + 5,
+        left: 10,
+      ),
+      child: Align(
+        alignment: Alignment.topLeft,
+        child: IconButton(
+          icon: Icon(
+            Icons.arrow_back_ios_new_rounded,
+            color: theme.colorScheme.onSurface,
+            size: 23,
+          ),
+          onPressed: () => Get.back(),
         ),
-        onPressed: () => Get.back(),
       ),
     );
   }
