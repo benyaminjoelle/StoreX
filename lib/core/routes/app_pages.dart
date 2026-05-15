@@ -1,10 +1,14 @@
 import 'package:get/get.dart';
 import 'package:storex/core/routes/app_routes.dart';
+import 'package:storex/features/auth/bindings/forgot_pass_binding.dart';
 import 'package:storex/features/auth/bindings/login_binding.dart';
 import 'package:storex/features/auth/bindings/singup_onboarding_binding.dart';
 
 import 'package:storex/features/auth/views/login/unified_login.dart';
 import 'package:storex/features/auth/views/signup/signup_onboarding.dart';
+import 'package:storex/features/auth/views/login/forgot_password.dart';
+import 'package:storex/features/auth/views/login/login_onboarding.dart';
+import 'package:storex/features/auth/views/login/login.dart';
 import 'package:storex/features/onboarding/binding/carousel_binding.dart';
 import 'package:storex/features/onboarding/views/onboarding_view.dart';
 
@@ -17,9 +21,13 @@ class AppPages {
     ),
     GetPage(
       name: AppRoutes.unifiedLogin,
-      page: () =>  UnifiedLogin(),
+      page: () => Login(),
       binding: LoginBinding(),
-     
+    ),
+    GetPage(
+      name: AppRoutes.forgotPassword,
+      page: () => const ForgotPassword(),
+      binding: ForgotPassBinding(),
     ),
       GetPage(
       name: AppRoutes.signupOnboarding,

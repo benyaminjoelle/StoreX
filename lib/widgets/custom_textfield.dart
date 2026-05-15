@@ -12,6 +12,7 @@ class CustomTextField extends StatelessWidget {
   final VoidCallback? onToggleVisibility;
 
   final Widget? suffixIcon;
+  final Widget? prefixIcon;
 
   final TextInputType keyboardType;
   final TextInputAction textInputAction;
@@ -25,6 +26,7 @@ class CustomTextField extends StatelessWidget {
     this.controller,
     this.validator,
     this.suffixIcon,
+    this.prefixIcon,
     this.isPassword = false,
     this.isObscure = false,
     this.onToggleVisibility,
@@ -43,7 +45,7 @@ class CustomTextField extends StatelessWidget {
 
     final horizontalPadding = size.width * 0.045;
     final verticalPadding = size.height * 0.02;
-    final borderRadius = size.width * 0.045;
+    final borderRadius = size.width * 0.024;
 
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
@@ -96,7 +98,7 @@ class CustomTextField extends StatelessWidget {
                     ),
                   )
                 : suffixIcon,
-
+            prefixIcon: prefixIcon,
             filled: true,
             fillColor: colors.surfaceContainerHighest.withOpacity(0.2),
 

@@ -65,6 +65,21 @@ class Validators {
   return null;
 }
 
+static String? emailOrPhoneValidation(String? value) {
+  if (value == null || value.trim().isEmpty) {
+    return 'Please Enter Email or Phone number'.tr;
+  }
+
+  // If the input contains '@', validate as email
+  if (value.contains('@')) {
+    return emailValidation(value);
+  } 
+  
+  // Otherwise, validate as phone number
+  // Note: We trim it in case the user added accidental spaces
+  return phoneValidation(value.trim());
+}
+
   static String? confirmPassword(String? value, String password) {
     if (value == null || value.isEmpty) {
       return 'Please confirm your password'.tr;
