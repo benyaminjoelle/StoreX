@@ -1,8 +1,10 @@
 import 'package:get/get.dart';
 import 'package:storex/core/routes/app_routes.dart';
 import 'package:storex/features/auth/bindings/login_binding.dart';
+import 'package:storex/features/auth/bindings/singup_onboarding_binding.dart';
 
 import 'package:storex/features/auth/views/login/unified_login.dart';
+import 'package:storex/features/auth/views/signup/signup_onboarding.dart';
 import 'package:storex/features/onboarding/binding/carousel_binding.dart';
 import 'package:storex/features/onboarding/views/onboarding_view.dart';
 
@@ -17,6 +19,12 @@ class AppPages {
       name: AppRoutes.unifiedLogin,
       page: () =>  UnifiedLogin(),
       binding: LoginBinding(),
+     
+    ),
+      GetPage(
+      name: AppRoutes.signupOnboarding,
+      page: () =>  SignupOnboarding(),
+      binding: SignupOnboardingBinding(),
      
     ),
   ];

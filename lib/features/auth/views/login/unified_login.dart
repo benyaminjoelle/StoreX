@@ -4,7 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:storex/core/utils/validators.dart';
 import 'package:storex/features/auth/controllers/login_controller.dart';
-import 'package:storex/features/auth/widgets/login_onboarding_header.dart';
+import 'package:storex/features/auth/widgets/signup_onboarding_header.dart';
 import 'package:storex/widgets/custom_textfield.dart';
 import 'package:storex/widgets/primary_button.dart';
 
@@ -78,7 +78,7 @@ class UnifiedLogin extends StatelessWidget {
                 mainAxisSize: MainAxisSize.min, // 2. Important: Tells Column to only take needed space
                 children: [
                   const SizedBox(height: 5),
-                  const LoginOnboardingHeader(),
+                 // const LoginOnboardingHeader(),
                   SizedBox(height: media.size.height * 0.08), // Fixed spacing instead of Spacer
                   
                   

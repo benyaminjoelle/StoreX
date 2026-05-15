@@ -93,7 +93,7 @@ class OnboardingView extends StatelessWidget {
                             const SizedBox(height: 12),
 
                             SecondaryButton(
-                              onPressed: () => Get.toNamed('/signup'),
+                              onPressed: () => Get.toNamed('/signupOnboarding'),
                               text: 'Create account'.tr,
                             ),
 

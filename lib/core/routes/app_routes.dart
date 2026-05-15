@@ -3,5 +3,5 @@ class AppRoutes {
   static const unifiedLogin = '/unifiedLogin';
   static const login = '/login';
   static const ForgotPassword = '/forgotPassword';
-  static const register = '/register';
+  static const signupOnboarding= '/signupOnboarding';
 }
