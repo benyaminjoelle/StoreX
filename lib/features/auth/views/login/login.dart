@@ -5,6 +5,7 @@ import 'package:get/get_connect/http/src/utils/utils.dart';
 import 'package:storex/core/routes/app_routes.dart';
 import 'package:storex/core/utils/validators.dart';
 import 'package:storex/features/auth/controllers/login_controller.dart';
+import 'package:storex/features/auth/widgets/login_header.dart';
 import 'package:storex/features/auth/widgets/login_onboarding_header.dart';
 import 'package:storex/widgets/back_button.dart';
 import 'package:storex/widgets/custom_textfield.dart';
@@ -74,7 +75,7 @@ class Login extends StatelessWidget {
                               mainAxisSize: MainAxisSize.min,
                               children: [
                                 const SizedBox(height: 5),
-                                const LoginOnboardingHeader(),
+                                const LoginHeader(),
                                 SizedBox(height: media.size.height * 0.08),
                                 
                                 // Email/Phone
