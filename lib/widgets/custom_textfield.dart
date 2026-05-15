@@ -6,9 +6,14 @@ class CustomTextField extends StatelessWidget {
   final String hint;
   final TextEditingController? controller;
   final String? Function(String?)? validator;
-  final IconData? prefixIcon;
-  final Widget? suffixIcon;
+
   final bool isPassword;
+  final bool isObscure;
+  final VoidCallback? onToggleVisibility;
+
+  final Widget? suffixIcon;
+  final Widget? prefixIcon;
+
   final TextInputType keyboardType;
   final TextInputAction textInputAction;
   final void Function(String)? onChanged;
@@ -20,9 +25,11 @@ class CustomTextField extends StatelessWidget {
     this.hint = '',
     this.controller,
     this.validator,
-    this.prefixIcon,
     this.suffixIcon,
+    this.prefixIcon,
     this.isPassword = false,
+    this.isObscure = false,
+    this.onToggleVisibility,
     this.keyboardType = TextInputType.text,
     this.textInputAction = TextInputAction.next,
     this.onChanged,
@@ -30,62 +37,113 @@ class CustomTextField extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final colors = Theme.of(context).colorScheme;
+    final theme = Theme.of(context);
+    final colors = theme.colorScheme;
+    final textTheme = theme.textTheme;
+
+    final size = MediaQuery.sizeOf(context);
+
+    final horizontalPadding = size.width * 0.045;
+    final verticalPadding = size.height * 0.02;
+    final borderRadius = size.width * 0.024;
 
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
         Row(
-          mainAxisAlignment: MainAxisAlignment.spaceBetween,
           children: [
-            Text(
-              label,
-              style: const TextStyle(fontWeight: FontWeight.bold, fontSize: 14),
+            Expanded(
+              child: Text(
+                label,
+                style: textTheme.labelLarge?.copyWith(
+                  fontWeight: FontWeight.w700,
+                  color: colors.onSurface,
+                ),
+              ),
             ),
             if (suffix != null) suffix!,
           ],
         ),
-          
-        
-        const SizedBox(height: 8),
+
+        SizedBox(height: size.height * 0.012),
+
         TextFormField(
           controller: controller,
           validator: validator,
-          obscureText: isPassword,
+          obscureText: isPassword ? isObscure : false,
           keyboardType: keyboardType,
           textInputAction: textInputAction,
           onChanged: onChanged,
-          autovalidateMode: AutovalidateMode.onUserInteraction,
+          autovalidateMode: AutovalidateMode.disabled,
+
+          style: textTheme.bodyLarge?.copyWith(
+            color: colors.onSurface,
+            fontWeight: FontWeight.w500,
+          ),
+
           decoration: InputDecoration(
-            hintText: hint, hintStyle: TextStyle(color: colors.onSurfaceVariant.withValues(alpha: 0.5)),
-            prefixIcon: prefixIcon != null ? Icon(prefixIcon, color: colors.primary) : null,
-            suffixIcon: suffixIcon,
+            hintText: hint,
+
+            hintStyle: textTheme.bodyMedium?.copyWith(
+              color: colors.onSurface.withOpacity(0.6),
+            ),
+
+            suffixIcon: isPassword
+                ? IconButton(
+                    onPressed: onToggleVisibility,
+                    icon: Icon(
+                      isObscure
+                          ? Icons.visibility_off_rounded
+                          : Icons.visibility_rounded,
+                    ),
+                  )
+                : suffixIcon,
+            prefixIcon: prefixIcon,
             filled: true,
-            fillColor: colors.surfaceContainerHighest.withValues(alpha: 0.3),
-            contentPadding: const EdgeInsets.symmetric(horizontal: 16, vertical: 12),
+            fillColor: colors.surfaceContainerHighest.withOpacity(0.2),
+
+            contentPadding: EdgeInsets.symmetric(
+              horizontal: horizontalPadding,
+              vertical: verticalPadding,
+            ),
+
             border: OutlineInputBorder(
-              borderRadius: BorderRadius.circular(12),
+              borderRadius: BorderRadius.circular(borderRadius),
               borderSide: BorderSide.none,
             ),
+
             enabledBorder: OutlineInputBorder(
-              borderRadius: BorderRadius.circular(12),
-              borderSide: BorderSide(color: colors.onSurfaceVariant.withValues(alpha: 0.5), width: 1),
+              borderRadius: BorderRadius.circular(borderRadius),
+              borderSide: BorderSide(
+                color: colors.outline.withOpacity(0.15),
+              ),
             ),
+
             focusedBorder: OutlineInputBorder(
-              borderRadius: BorderRadius.circular(12),
-              borderSide: BorderSide(color: colors.primary, width: 2),
+              borderRadius: BorderRadius.circular(borderRadius),
+              borderSide: BorderSide(
+                color: colors.primary,
+                width: 1.5,
+              ),
             ),
+
             errorBorder: OutlineInputBorder(
-              borderRadius: BorderRadius.circular(12),
-              borderSide: BorderSide(color: colors.error, width: 1),
+              borderRadius: BorderRadius.circular(borderRadius),
+              borderSide: BorderSide(
+                color: colors.error,
+              ),
             ),
+
             focusedErrorBorder: OutlineInputBorder(
-              borderRadius: BorderRadius.circular(12),
-              borderSide: BorderSide(color: colors.error, width: 2),
+              borderRadius: BorderRadius.circular(borderRadius),
+              borderSide: BorderSide(
+                color: colors.error,
+                width: 1.5,
+              ),
             ),
           ),
         ),
-  ],
-  );
+      ],
+    );
   }
 }
