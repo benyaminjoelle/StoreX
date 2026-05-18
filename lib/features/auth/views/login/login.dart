@@ -35,17 +35,7 @@ class Login extends StatelessWidget {
               Container(
                 color: theme.scaffoldBackgroundColor,
               ),
-            // 1. Background Image Layer
-            // Positioned.fill(
-            //   child: Image.asset(
-            //     backgroundImage,
-            //     fit: BoxFit.cover,
-            //     color: Colors.black.withValues(alpha: isDarkMode ? 0.3 : 0.1),
-            //     colorBlendMode: BlendMode.darken,
-              // ),
-            // ),
-
-            // 2. Content Layer
+            
   SafeArea(
     child: Center(
       child: SingleChildScrollView(
@@ -73,10 +63,11 @@ class Login extends StatelessWidget {
                   key: controller.loginFormKey,
                   // autovalidateMode: AutovalidateMode.onUserInteraction,
                   child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.end,
                     mainAxisSize: MainAxisSize.min,
                     children: [
                       const SizedBox(height: 5),
-                      const LoginHeader(),
+                      Center(child: const LoginHeader()),
                       SizedBox(height: media.size.height * 0.08),
                       
                       // Email/Phone
@@ -107,21 +98,18 @@ class Login extends StatelessWidget {
                           onToggleVisibility: controller.togglePasswordVisibility,
                           textInputAction: TextInputAction.done,
                           validator: (value) => Validators.passwordValidation(value),
-                          suffix: TextButton(
+                           
+                        ),
+                      ),
+                      TextButton(
                             onPressed: () {
                               Get.toNamed(AppRoutes.forgotPassword);
                             },
-                            child: Text('Forgot Password?'.tr),
+                            child: Text('Forgot Password?'.tr,
+                            textAlign: TextAlign.end,),
                           ),
-                          // prefixIcon: Icon(
-                          //   Icons.lock_outline,
-                          //   color: theme.colorScheme.onSurface.withValues(alpha: 0.6),
-                          //   size: 20,
-                          // ),
-                        ),
-                      ),
                       
-                      SizedBox(height: media.size.height * 0.04),
+                      SizedBox(height: media.size.height * 0.02),
                       
                       PrimaryButton(
                         text: "Login".tr,

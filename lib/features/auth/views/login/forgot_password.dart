@@ -3,6 +3,7 @@ import 'package:get/get.dart';
 import 'package:storex/core/routes/app_routes.dart';
 import 'package:storex/core/utils/validators.dart';
 import 'package:storex/features/auth/controllers/forgot_pass_controller.dart';
+import 'package:storex/features/onboarding/widgets/top_snackbar.dart';
 import 'package:storex/widgets/back_button.dart';
 import 'package:storex/widgets/custom_textfield.dart';
 import 'package:storex/widgets/primary_button.dart';
@@ -31,7 +32,7 @@ class ForgotPassword extends StatelessWidget {
             child: Padding(
               padding: EdgeInsets.symmetric(horizontal: media.size.width * 0.05, vertical: media.size.height * 0.02),
               child: Form(
-                key: controller.passwordKey,
+                key: controller.formKey,
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
@@ -73,9 +74,17 @@ class ForgotPassword extends StatelessWidget {
                     // Spacer(),
                     SizedBox(height: media.size.height * 0.18,),
                     PrimaryButton(text: "Send Email", onPressed: () {
-                       if (controller.passwordKey.currentState!.validate()){
+                       if (controller.formKey.currentState!.validate()){
                         //  controller.sendVerificationEmail();
                         Get.toNamed(AppRoutes.verifyCode);
+                    }
+                    else{
+                      TopSnackbar.show(
+                        title: "Invalid Email".tr,
+                        message: "Please enter a valid email address.".tr,
+                        icon: Icons.error_outline,
+                        iconColor: theme.colorScheme.error,
+                        );
                     }
                     }),
                   ],
