@@ -5,6 +5,8 @@ class PrimaryButton extends StatelessWidget {
   final VoidCallback? onPressed;
   final bool isLoading;
   final bool isDisabled;
+  // final bool isDarkMode;
+
 
   const PrimaryButton({
     super.key,
@@ -12,12 +14,15 @@ class PrimaryButton extends StatelessWidget {
     required this.onPressed,
     this.isLoading = false,
     this.isDisabled = false,
+    // this.isDarkMode = false,
   });
 
   @override
   Widget build(BuildContext context) {
     final theme = Theme.of(context);
     final colors = theme.colorScheme;
+    final isDarkMode = theme.brightness == Brightness.dark;
+
 
     final effectiveOnPressed =
         (isDisabled || isLoading) ? null : onPressed;

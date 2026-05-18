@@ -9,6 +9,9 @@ import 'package:storex/features/auth/views/signup/client/signup_shell.dart';
 import 'package:storex/features/auth/views/signup/signup_onboarding.dart';
 import 'package:storex/features/auth/views/login/forgot_password.dart';
 
+import 'package:storex/features/auth/views/login/verify_code.dart';
+import 'package:storex/features/auth/views/signup/signup_onboarding.dart';
+import 'package:storex/features/auth/views/login/forgot_password.dart';
 import 'package:storex/features/auth/views/login/login.dart';
 import 'package:storex/features/onboarding/binding/carousel_binding.dart';
 import 'package:storex/features/onboarding/views/onboarding_view.dart';
@@ -30,7 +33,12 @@ class AppPages {
       page: () => const ForgotPassword(),
       binding: ForgotPassBinding(),
     ),
-      GetPage(
+     GetPage(
+      name: AppRoutes.verifyCode,
+      page: () => const verifyCode(),
+      // binding: ForgotPassBinding(),
+    ),
+    GetPage(
       name: AppRoutes.signupOnboarding,
       page: () =>  SignupOnboarding(),
       binding: SignupOnboardingBinding(),
@@ -50,5 +58,6 @@ class AppPages {
       page: () =>  AccountInfoView(),
 
     ),
+  
   ];
 }

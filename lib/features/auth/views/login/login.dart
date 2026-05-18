@@ -71,6 +71,7 @@ class Login extends StatelessWidget {
                 ),
                 child: Form(
                   key: controller.loginFormKey,
+                  // autovalidateMode: AutovalidateMode.onUserInteraction,
                   child: Column(
                     mainAxisSize: MainAxisSize.min,
                     children: [
@@ -81,7 +82,7 @@ class Login extends StatelessWidget {
                       // Email/Phone
                       CustomTextField(
                         controller: controller.emailController,
-                        label: 'Email Address / Phone number'.tr,
+                        label: 'Email Address / Phone number:'.tr,
                         hint: 'Enter Email or Phone number'.tr,
                         keyboardType: TextInputType.emailAddress,
                         validator: (value) => Validators.emailOrPhoneValidation(value),
@@ -99,7 +100,7 @@ class Login extends StatelessWidget {
                       Obx(
                         () => CustomTextField(
                           controller: controller.passwordController,
-                          label: 'Password'.tr,
+                          label: 'Password:'.tr,
                           hint: 'Enter your password'.tr,
                           isPassword: true,
                           isObscure: controller.isPasswordHidden.value,
