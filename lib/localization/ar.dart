@@ -1,9 +1,13 @@
 const Map<String, String> ar = {
   //A
+  "Already have an account?":'لديك حساب مسبق؟',
   //B
    "By continuing, you agree to our Terms of Service and Privacy Policy.":"بالمتابعة، أنت توافق على شروط الخدمة وسياسة الخصوصية.",
   //C
    'Create account': 'إنشاء حساب',
+   "Choose your account type to get started with StoreX":'اختر نوع الحساب للبدأ',
+   "Client": "عميل",
+   "Continue":'المتابعة',
   //D
   //E
    'Email Address/Phone number':'البريد الالكتروني/رقم الهاتف',
@@ -24,11 +28,14 @@ const Map<String, String> ar = {
    "Live Analytics": "تحليلات مباشرة",
    'Login': 'تسجيل الدخول',
   //M
+   "Manage warehouses, storage, and incoming orders":
+      "إدارة المستودعات والتخزين والطلبات الواردة",
   //N
    'Name must be at least 2 characters'
   //O
    'Only letters are allowed':'يسمح فقط بالحروف',
    "Optimize shipping routes automatically.":"تحسين مسارات الشحن تلقائيًا.",
+   "Order products from warehouses": "اطلب المنتجات من المستودعات",
 
   //P
    'Password': 'كلمة المرور',
@@ -44,6 +51,7 @@ const Map<String, String> ar = {
    'Please upload your ID photo':'يرجى ادخال صورة الهوية ',
    'Phone number must contain only digits':'يجب أن ',
    'Phone number must start with 09':'يجب أن يبدأ الرقم ب 09',
+   "Please choose an account type": "يرجى اختيار نوع الحساب",
   //Q
   //R
    'Required':'مطلوب',
@@ -52,6 +60,7 @@ const Map<String, String> ar = {
    'Street name is too long':'اسم الشارع طويل جدا',
    "Secure System": "نظام آمن",
    "Smart Inventory": "المخزون الذكي",
+    "Selection Required": "الاختيار مطلوب",
   //T
    'terms': 'بالمتابعة، أنت توافق على الشروط وسياسة الخصوصية.',
    "Track stock in real-time with zero effort.":"تتبع المخزون لحظيًا بدون أي مجهود.",
@@ -60,6 +69,7 @@ const Map<String, String> ar = {
   //V
   //W
    "Welcome Back!": "مرحبًا بعودتك!",
+    "Warehouse Owner": "صاحب مستودع",
   //X
   //Y
    'You must be at least 18 years old':'يجب أن يكون عمرك 18 عامًا على الأقل',

@@ -1,16 +1,21 @@
 const Map<String, String> en = {
   //A
+  "Already have an account?":"Already have an account?",
   //B
     "By continuing, you agree to our Terms of Service and Privacy Policy.":"By continuing, you agree to our Terms of Service and Privacy Policy.",
 
   //C
     'Create account': 'Create account',
+    "Choose your account type to get started with StoreX":"Choose your account type to get started with StoreX",
+    "Client":"Client",
+    "Continue":"Continue",
 
   //D
   //E
     'Email Address/Phone number':'Email Address/Phone number',
     'Enter Email or Phone number':'Enter Email or Phone number',
     'Enter your password':'Enter your password',
+    
   //F
     'Forgot Password?':'Forgot Password?',
     "Fast Logistics": "Fast Logistics",
@@ -24,10 +29,12 @@ const Map<String, String> en = {
     "Live Analytics": "Live Analytics",
 
   //M
+  "Manage warehouses, storage, and incoming orders ":"Manage warehouses, storage, and incoming orders ",
   //N
   //O
     'Only letters are allowed':'Only letters are allowed',
     "Optimize shipping routes automatically.":"Optimize shipping routes automatically.",
+    "Order products from warehouses":"Order products from warehouses",
 
   //P
    'Password': 'Password',
@@ -43,12 +50,14 @@ const Map<String, String> en = {
    'Please upload your ID photo':'Please upload your ID photo',
    'Phone number must contain only digits':'Phone number must contain only digits',
    'Phone number must start with 09':'Phone number must start with 09',
+   "Please choose an account type":"Please choose an account type",
 
   //Q
   //R
   //S
     "Secure System": "Secure System",
     "Smart Inventory": "Smart Inventory",
+    "Selection Required":"Selection Required",
 
 
   //T
@@ -60,6 +69,7 @@ const Map<String, String> en = {
   //V
   //W
    "Welcome Back!": "Welcome Back!",
+   "Warehouse Owner":"Warehouse Owner",
   //X
   //Y
     'You must be at least 18 years old':'You must be at least 18 years old',
