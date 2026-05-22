@@ -13,7 +13,6 @@ class verifyCode extends StatelessWidget{
   Widget build(BuildContext context) {
     final theme = Theme.of(context);
     final media = MediaQuery.of(context);
-    final darkMode = theme.brightness == Brightness.dark;
     final String backgroundImage = 'assets/photos/forgot_pass.png';
     final controller = Get.find<ForgotPassController>();
     final defaultPinTheme = PinTheme(

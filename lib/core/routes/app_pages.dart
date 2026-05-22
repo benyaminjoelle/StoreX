@@ -1,10 +1,13 @@
 import 'package:get/get.dart';
 import 'package:storex/core/routes/app_routes.dart';
+import 'package:storex/features/auth/bindings/client_signup_binding.dart';
 import 'package:storex/features/auth/bindings/forgot_pass_binding.dart';
 import 'package:storex/features/auth/bindings/login_binding.dart';
+import 'package:storex/features/auth/bindings/owner_signup_binding.dart';
 import 'package:storex/features/auth/bindings/singup_onboarding_binding.dart';
 
-import 'package:storex/features/auth/views/signup/client/signup_view.dart';
+import 'package:storex/features/auth/views/signup/client/client_signup_view.dart';
+import 'package:storex/features/auth/views/signup/owner/owner_signup_view.dart';
 import 'package:storex/features/auth/views/signup/signup_onboarding.dart';
 import 'package:storex/features/auth/views/login/forgot_password.dart';
 
@@ -34,7 +37,7 @@ class AppPages {
      GetPage(
       name: AppRoutes.verifyCode,
       page: () => const verifyCode(),
-      // binding: ForgotPassBinding(),
+       binding: ForgotPassBinding(),
     ),
     GetPage(
       name: AppRoutes.signupOnboarding,
@@ -42,8 +45,15 @@ class AppPages {
       binding: SignupOnboardingBinding(),
     ),
      GetPage(
-      name: AppRoutes.signup,
-      page: () => SignupView(),
+      name: AppRoutes.clientSignup,
+      page: () => ClientSignupView(),
+      binding:ClientSignupBinding()
+
+    ),
+    GetPage(
+      name: AppRoutes.ownerSignup,
+      page: () => OwnerSignupView(),
+      binding: OwnerSignupBinding()
 
     ),
     

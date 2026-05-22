@@ -1,12 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-
 import 'package:storex/core/constants/app_colors.dart';
-
 import 'package:storex/widgets/app_dialog.dart';
 import 'package:storex/widgets/app_snackbar.dart';
 
-class ClientSignupController extends GetxController {
+class OwnerSignupController extends GetxController {
   /// =========================================================
   /// FORM KEY
   /// =========================================================
@@ -38,9 +36,7 @@ class ClientSignupController extends GetxController {
   /// BUSINESS INFO CONTROLLERS
   /// =========================================================
 
-  final businessNameController =
-      TextEditingController();
-
+ 
   /// =========================================================
   /// VERIFICATION CONTROLLERS
   /// =========================================================
@@ -135,8 +131,7 @@ class ClientSignupController extends GetxController {
     passwordController.dispose();
     confirmPasswordController.dispose();
 
-    /// BUSINESS INFO
-    businessNameController.dispose();
+    
 
     /// VERIFICATION
     otpController.dispose();

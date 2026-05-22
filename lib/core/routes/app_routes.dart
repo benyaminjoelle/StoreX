@@ -1,7 +1,8 @@
 class AppRoutes {
   static const onboarding = '/onboarding';
   static const login = '/login';
-  static const signup = '/signup';
+  static const clientSignup = '/clientSignup';
+  static const ownerSignup = '/ownerSignup';
   static const signupOnboarding = '/signupOnboarding';
   static const forgotPassword = '/forgotPassword';
   static const verifyCode = '/verifyCode';
