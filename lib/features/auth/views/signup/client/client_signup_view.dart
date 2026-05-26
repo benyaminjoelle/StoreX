@@ -87,8 +87,8 @@ class ClientSignupView extends StatelessWidget {
                                   /// FIRST NAME
                                   CustomTextField(
                                     controller: controller.firstNameController,
-                                    label: "First Name".tr,
-                                    hint: "Enter first name".tr,
+                                    label: "First Name:".tr,
+                                    hint: "Enter your first name".tr,
                                     textInputAction: TextInputAction.next,
                                     validator: Validators.nameValidation,
                                   ),
@@ -98,8 +98,8 @@ class ClientSignupView extends StatelessWidget {
                                   /// LAST NAME
                                   CustomTextField(
                                     controller: controller.lastNameController,
-                                    label: "Last Name".tr,
-                                    hint: "Enter last name".tr,
+                                    label: "Last Name:".tr,
+                                    hint: "Enter your last name".tr,
                                     textInputAction: TextInputAction.next,
                                     validator: Validators.nameValidation,
                                   ),
@@ -109,7 +109,7 @@ class ClientSignupView extends StatelessWidget {
                                   /// BUSINESS NAME
                                   CustomTextField(
                                     controller: controller.businessNameController,
-                                    label: "Business Name".tr,
+                                    label: "Business Name:".tr,
                                     hint: "Enter your business name".tr,
                                     textInputAction: TextInputAction.next,
                                     validator: Validators.nameValidation,
@@ -120,7 +120,7 @@ class ClientSignupView extends StatelessWidget {
                                   /// EMAIL
                                   CustomTextField(
                                     controller: controller.emailController,
-                                    label: "Business Email".tr,
+                                    label: "Business Email:".tr,
                                     hint: "Enter your business email".tr,
                                     keyboardType: TextInputType.emailAddress,
                                     textInputAction: TextInputAction.next,
@@ -132,8 +132,8 @@ class ClientSignupView extends StatelessWidget {
                                   /// PHONE
                                   CustomTextField(
                                     controller: controller.phoneController,
-                                    label: "Business Phone".tr,
-                                    hint: "+963",
+                                    label: "Business phone number:".tr,
+                                    hint: "Enter your phone number".tr,
                                     keyboardType: TextInputType.phone,
                                     textInputAction: TextInputAction.next,
                                     validator: Validators.phoneValidation,
@@ -165,20 +165,15 @@ class ClientSignupView extends StatelessWidget {
                                       controller:
                                           controller.confirmPasswordController,
                                       label: 'Confirm Password:'.tr,
-                                      hint: 'Enter your password'.tr,
+                                      hint: 'Confirm your password'.tr,
                                       isPassword: true,
                                       isObscure:
                                           controller.isConfirmPasswordHidden.value,
                                       onToggleVisibility:
                                           controller.toggleConfirmPasswordVisibility,
                                       textInputAction: TextInputAction.done,
-                                      validator: (value) {
-                                        if (value !=
-                                            controller.passwordController.text) {
-                                          return "Passwords do not match".tr;
-                                        }
-                                        return null;
-                                      },
+                                      validator:(value)=> Validators.confirmPassword(value,controller.passwordController.text)
+                                    
                                     ),
                                   ),
 
@@ -188,8 +183,8 @@ class ClientSignupView extends StatelessWidget {
                                   PrimaryButton(
                                     text: "Continue".tr,
                                     onPressed: () {
-                                      controller.validateClient();
-                                      Get.toNamed('/verifyCode');
+                                      controller.continueToVerify();
+                                   
                                     },
                                   ),
 

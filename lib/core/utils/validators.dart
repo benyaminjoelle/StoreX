@@ -3,7 +3,7 @@ import 'package:get/get.dart';
 class Validators {
   static String? phoneValidation(String? value) {
     if (value == null || value.isEmpty) {
-      return 'Please Enter Phone Number'.tr;
+      return 'Required'.tr;
     }
     // Only numbers allowed
     if (!RegExp(r'^\d+$').hasMatch(value)) {
@@ -23,17 +23,18 @@ class Validators {
 
   static String? passwordValidation(String? value) {
     if (value == null || value.isEmpty) {
-      return 'Please Enter The Password'.tr;
+      return 'Required'.tr;
     }
     if (value.length < 8) {
       return 'Password must be at least 8 characters long'.tr;
     }
     return null;
   }
+  
 
   static String? nameValidation(String? value) {
     if (value == null || value.trim().isEmpty) {
-      return 'Please Enter Your Name'.tr;
+      return 'Required'.tr;
     }
 
     // Only letters (English or Arabic)
@@ -49,7 +50,7 @@ class Validators {
   }
   static String? usernameValidation(String? value) {
   if (value == null || value.trim().isEmpty) {
-    return 'Username is required'.tr;
+    return 'Required'.tr;
   }
 
   final v = value.trim().toLowerCase();
@@ -76,7 +77,7 @@ class Validators {
 }
   static String? emailValidation(String? value) {
   if (value == null || value.trim().isEmpty) {
-    return 'Please Enter your Email'.tr;
+    return 'Required'.tr;
   }
 
   // 2. Define the Email Regex pattern
@@ -122,7 +123,7 @@ static String? validateCode(String? value) {
 
   static String? confirmPassword(String? value, String password) {
     if (value == null || value.isEmpty) {
-      return 'Please confirm your password'.tr;
+      return 'Required'.tr;
     }
 
     if (value != password) {

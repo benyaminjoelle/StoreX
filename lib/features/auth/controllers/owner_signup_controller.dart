@@ -9,7 +9,7 @@ class OwnerSignupController extends GetxController {
   /// FORM KEY
   /// =========================================================
 
-  final clientSignupKey = GlobalKey<FormState>();
+  final ownerSignupKey = GlobalKey<FormState>();
 
   /// =========================================================
   /// BASIC INFO CONTROLLERS
@@ -57,8 +57,8 @@ class OwnerSignupController extends GetxController {
   /// VALIDATIONS
   /// =========================================================
 
-  bool validateClient() {
-    return clientSignupKey.currentState
+  bool validateOwner() {
+    return ownerSignupKey.currentState
             ?.validate() ??
         false;
   }
@@ -82,10 +82,10 @@ class OwnerSignupController extends GetxController {
   /// =========================================================
 
   void continueToVerify() {
-    if (!validateClient()) {
+    if (!validateOwner()) {
       AppSnackbar.show(
-        title: "Invalid Data",
-        message: "Please check your inputs",
+        title: "Invalid Data".tr,
+        message: "Please check your inputs".tr,
         icon: Icons.warning_amber_rounded,
         iconColor: AppColors.error,
       );
@@ -94,6 +94,7 @@ class OwnerSignupController extends GetxController {
     }
 
     /// continue logic here
+      Get.toNamed('/verifyCode');
   }
 
   /// =========================================================
@@ -103,9 +104,9 @@ class OwnerSignupController extends GetxController {
   Future<void> handleBack() async {
     final result =
         await AppDialogs.showConfirmDialog(
-      title: "Exit signup?",
+      title: "Exit signup?".tr,
       message:
-          "Your progress will be lost if you leave now.",
+          "Your progress will be lost if you leave now.".tr,
       confirmText: "Exit",
       confirmColor: Colors.red,
     );
