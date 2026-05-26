@@ -29,15 +29,10 @@ class OwnerSignupView extends StatelessWidget {
               /// FIXED BACK BUTTON ROW
               /// =========================
               Padding(
-                padding: const EdgeInsets.only(
-                  top: 10,
-                  left: 10,
-                ),
+                padding: const EdgeInsets.only(top: 10, left: 10),
                 child: Align(
                   alignment: Alignment.centerLeft,
-                  child: CustomBackButton(
-                    onPressed: controller.handleBack,
-                  ),
+                  child: CustomBackButton(onPressed: controller.handleBack),
                 ),
               ),
 
@@ -56,10 +51,7 @@ class OwnerSignupView extends StatelessWidget {
                       child: ClipRRect(
                         borderRadius: BorderRadius.circular(30),
                         child: BackdropFilter(
-                          filter: ImageFilter.blur(
-                            sigmaX: 20,
-                            sigmaY: 20,
-                          ),
+                          filter: ImageFilter.blur(sigmaX: 20, sigmaY: 20),
                           child: Container(
                             padding: EdgeInsets.symmetric(
                               horizontal: media.size.width * 0.05,
@@ -74,7 +66,7 @@ class OwnerSignupView extends StatelessWidget {
                             ),
 
                             child: Form(
-                              key: controller.clientSignupKey,
+                              key: controller.ownerSignupKey,
                               child: Column(
                                 mainAxisSize: MainAxisSize.min,
                                 children: [
@@ -85,8 +77,8 @@ class OwnerSignupView extends StatelessWidget {
                                   /// FIRST NAME
                                   CustomTextField(
                                     controller: controller.firstNameController,
-                                    label: "First Name".tr,
-                                    hint: "Enter first name".tr,
+                                    label: "First Name:".tr,
+                                    hint: "Enter your first name".tr,
                                     textInputAction: TextInputAction.next,
                                     validator: Validators.nameValidation,
                                   ),
@@ -96,19 +88,18 @@ class OwnerSignupView extends StatelessWidget {
                                   /// LAST NAME
                                   CustomTextField(
                                     controller: controller.lastNameController,
-                                    label: "Last Name".tr,
-                                    hint: "Enter last name".tr,
+                                    label: "Last Name:".tr,
+                                    hint: "Enter your last name".tr,
                                     textInputAction: TextInputAction.next,
                                     validator: Validators.nameValidation,
                                   ),
 
-                                
                                   SizedBox(height: media.size.height * 0.03),
 
                                   /// EMAIL
                                   CustomTextField(
                                     controller: controller.emailController,
-                                    label: "Business Email".tr,
+                                    label: "Business Email:".tr,
                                     hint: "Enter your business email".tr,
                                     keyboardType: TextInputType.emailAddress,
                                     textInputAction: TextInputAction.next,
@@ -120,8 +111,8 @@ class OwnerSignupView extends StatelessWidget {
                                   /// PHONE
                                   CustomTextField(
                                     controller: controller.phoneController,
-                                    label: "Business Phone".tr,
-                                    hint: "+963",
+                                    label: "Business phone number:".tr,
+                                    hint: "Enter your phone number".tr,
                                     keyboardType: TextInputType.phone,
                                     textInputAction: TextInputAction.next,
                                     validator: Validators.phoneValidation,
@@ -136,7 +127,8 @@ class OwnerSignupView extends StatelessWidget {
                                       label: 'Password:'.tr,
                                       hint: 'Enter your password'.tr,
                                       isPassword: true,
-                                      isObscure: controller.isPasswordHidden.value,
+                                      isObscure:
+                                          controller.isPasswordHidden.value,
                                       onToggleVisibility:
                                           controller.togglePasswordVisibility,
                                       textInputAction: TextInputAction.done,
@@ -153,20 +145,21 @@ class OwnerSignupView extends StatelessWidget {
                                       controller:
                                           controller.confirmPasswordController,
                                       label: 'Confirm Password:'.tr,
-                                      hint: 'Enter your password'.tr,
+                                      hint: 'Confirm your password'.tr,
                                       isPassword: true,
-                                      isObscure:
-                                          controller.isConfirmPasswordHidden.value,
-                                      onToggleVisibility:
-                                          controller.toggleConfirmPasswordVisibility,
+                                      isObscure: controller
+                                          .isConfirmPasswordHidden
+                                          .value,
+                                      onToggleVisibility: controller
+                                          .toggleConfirmPasswordVisibility,
                                       textInputAction: TextInputAction.done,
-                                      validator: (value) {
-                                        if (value !=
-                                            controller.passwordController.text) {
-                                          return "Passwords do not match".tr;
-                                        }
-                                        return null;
-                                      },
+                                      validator: (value) =>
+                                          Validators.confirmPassword(
+                                            value,
+                                            controller
+                                                .confirmPasswordController
+                                                .text,
+                                          ),
                                     ),
                                   ),
 
@@ -176,8 +169,7 @@ class OwnerSignupView extends StatelessWidget {
                                   PrimaryButton(
                                     text: "Continue".tr,
                                     onPressed: () {
-                                      controller.validateClient();
-                                      Get.toNamed('/verifyCode');
+                                      controller.continueToVerify();
                                     },
                                   ),
 

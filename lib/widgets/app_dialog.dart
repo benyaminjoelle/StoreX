@@ -18,12 +18,12 @@ class AppDialogs {
         actions: [
           TextButton(
             onPressed: () => Get.back(result: false),
-            child: Text(cancelText),
+            child: Text(cancelText.tr),
           ),
           TextButton(
             onPressed: () => Get.back(result: true),
             child: Text(
-              confirmText,
+              confirmText.tr,
               style: TextStyle(
                 color: confirmColor ?? Colors.red,
                 fontWeight: FontWeight.w600,
