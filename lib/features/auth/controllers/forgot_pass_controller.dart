@@ -1,5 +1,9 @@
+import 'dart:async';
+
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:storex/features/auth/views/login/verify_Code.dart';
+import 'package:storex/features/onboarding/widgets/top_snackbar.dart';
 
 
 class ForgotPassController extends GetxController{
@@ -9,7 +13,57 @@ class ForgotPassController extends GetxController{
   final newPasswordController = TextEditingController();
   final confirmPasswordController = TextEditingController();
   final passwordKey = GlobalKey<FormState>();
+  final formKey = GlobalKey<FormState>();
 
+  ThemeData get theme => Get.theme;
+
+  //-------Timer-----------
+  Timer? timer;
+  var secondsRemaining = 60.obs;
+  var isResendEnabled = true.obs;
+
+  @override
+  void onInit() {
+    super.onInit();
+    startResendTimer();
+  }
+
+  void startResendTimer(){
+    isResendEnabled.value = false;
+    secondsRemaining.value += 10; //reset for 60 after testing
+    //cancel any timers if already running
+    timer?.cancel();
+    timer = Timer.periodic(const Duration(seconds: 1), (timer) {
+      if (secondsRemaining.value > 0) {
+        secondsRemaining.value--;
+      } else {
+        isResendEnabled.value = true;
+        timer.cancel();
+      }
+    });
+  }
+  Future<void> resendCode() async {
+    if(!isResendEnabled.value) return;
+
+    try {
+      // 1. Trigger your backend resend API request here
+      // await _authService.resendCode(emailController.text);
+      startResendTimer();
+      TopSnackbar.show(
+        title: "Code Resent",
+        message: "A new verification code has been sent to your email.",
+        icon: Icons.check_circle_outline,
+        iconColor: theme.colorScheme.tertiary,
+      );
+    } catch (e) {
+      TopSnackbar.show(
+        title: "Error",
+        message: "Failed to resend code. Please try again.",
+        icon: Icons.error_outline,
+        iconColor: theme.colorScheme.error,
+      );
+    }
+  }
 
   //------------states -----------------
   var isLoading = false.obs;
@@ -33,7 +87,7 @@ class ForgotPassController extends GetxController{
   Future<void> verifyCode() async {
     try {
       isLoading.value = true;
-      // Your API logic here using otpController.text
+      // Your API logic here using codeController.text
       
       // On success, move to Reset Password Screen
       Get.toNamed('/resetPassword');
@@ -65,6 +119,7 @@ class ForgotPassController extends GetxController{
     codeController.dispose();
     newPasswordController.dispose();
     confirmPasswordController.dispose();
+    timer?.cancel();
     super.onClose();
   }
 }

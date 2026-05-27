@@ -57,6 +57,8 @@ class ClientSignupController extends GetxController {
 
   final isLoading = false.obs;
 
+  ThemeData get theme => Get.theme;
+
   /// =========================================================
   /// VALIDATIONS
   /// =========================================================
@@ -91,7 +93,7 @@ class ClientSignupController extends GetxController {
         title: "Invalid Data".tr,
         message: "Please check your inputs".tr,
         icon: Icons.warning_amber_rounded,
-        iconColor: AppColors.error,
+        iconColor: theme.colorScheme.error,
       );
 
       return;
@@ -112,9 +114,9 @@ class ClientSignupController extends GetxController {
         await AppDialogs.showConfirmDialog(
       title: "Exit signup?".tr,
       message:
-          "Your progress will be lost if you leave now.".tr,
-      confirmText: "Exit".tr,
-      confirmColor: Colors.red,
+          "Your progress will be lost if you leave now.",
+      confirmText: "Exit",
+      confirmColor: theme.colorScheme.error,
     );
 
     if (result == true) {

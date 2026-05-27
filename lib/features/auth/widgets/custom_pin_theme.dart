@@ -1,26 +1,53 @@
 import 'package:flutter/material.dart';
 import 'package:pinput/pinput.dart';
 
-class CustomPinTheme {
-  /// Returns the complete set of configured PinThemes based on current layout context
+class CustomPinTheme extends StatelessWidget {
+  final TextEditingController? controller;
+  final ValueChanged<String>? onCompleted;
+  final String? Function(String?)? validator;
+  final int length;
+  final TextInputType keyboardType;
+
+  const CustomPinTheme({
+    super.key,
+    this.controller,
+    this.onCompleted,
+    this.validator,
+    this.length = 4,
+    this.keyboardType = TextInputType.number,
+  });
+
+  @override
+  Widget build(BuildContext context) {
+    final themeData = getThemes(context);
+
+    return Pinput(
+      length: length,
+      controller: controller,
+      defaultPinTheme: themeData.defaultTheme,
+      focusedPinTheme: themeData.focusedTheme,
+      errorPinTheme: themeData.errorTheme,
+      keyboardType: keyboardType,
+      validator: validator,
+      onCompleted: onCompleted,
+    );
+  }
+
   static PinThemeData getThemes(BuildContext context) {
     final theme = Theme.of(context);
-    final isDarkMode = theme.brightness == Brightness.dark;
 
     // 1. The Default Style
     final defaultTheme = PinTheme(
-      width: 56,
+      width: 50,
       height: 56,
       textStyle: theme.textTheme.headlineMedium?.copyWith(
         fontWeight: FontWeight.bold,
         color: theme.textTheme.bodyLarge?.color,
       ),
       decoration: BoxDecoration(
-        color: isDarkMode 
-            ? Colors.white.withOpacity(0.05) 
-            : Colors.black.withOpacity(0.05),
+        color: theme.scaffoldBackgroundColor,
         borderRadius: BorderRadius.circular(12),
-        border: Border.all(color: Colors.transparent),
+        border: Border.all(color: theme.primaryColor),
       ),
     );
 

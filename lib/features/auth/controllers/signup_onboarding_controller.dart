@@ -39,6 +39,10 @@ if (selected == null) {
       case AccountType.warehouseOwner:
         Get.toNamed('/ownerSignup');
         break;
+
+      case AccountType.warehouseStaff:
+       Get.toNamed('/workerSignup');
+        break;
     }
   }
 }

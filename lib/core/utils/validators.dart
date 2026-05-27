@@ -86,7 +86,7 @@ class Validators {
 
   // 3. Validate the format
   if (!emailRegExp.hasMatch(value)) {
-    return 'Please Enter a valid Email address'.tr;
+    return "Please Enter a valid email address.".tr;
   }
 
   // 4. Return null if validation passes
@@ -107,6 +107,19 @@ static String? emailOrPhoneValidation(String? value) {
   // Note: We trim it in case the user added accidental spaces
   return phoneValidation(value.trim());
 }
+
+static String? validateCode(String? value) {
+    if (value == null || value.isEmpty) {
+      return 'Please enter the verification code'.tr;
+    }
+    if (value.length != 4) {
+      return 'Verification code must be 4 digits'.tr;
+    }
+    if (!RegExp(r'^\d{4}$').hasMatch(value)) {
+      return 'Verification code must contain only digits'.tr;
+    }
+    return null;
+  }
 
   static String? confirmPassword(String? value, String password) {
     if (value == null || value.isEmpty) {
