@@ -4,7 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:storex/core/routes/app_routes.dart';
 import 'package:storex/core/utils/validators.dart';
-import 'package:storex/features/auth/controllers/client_signup_controller.dart';
+
 import 'package:storex/features/auth/controllers/worker_signup_controller.dart';
 
 import 'package:storex/features/auth/widgets/signup_header.dart';
