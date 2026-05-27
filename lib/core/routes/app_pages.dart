@@ -14,6 +14,9 @@ import 'package:storex/features/auth/views/login/forgot_password.dart';
 import 'package:storex/features/auth/views/login/verify_code.dart';
 
 import 'package:storex/features/auth/views/login/login.dart';
+import 'package:storex/features/client/home/client_home_view.dart';
+import 'package:storex/features/client/root/binding/root_binding.dart';
+import 'package:storex/features/client/root/view/root_view.dart';
 import 'package:storex/features/onboarding/binding/carousel_binding.dart';
 import 'package:storex/features/onboarding/views/onboarding_view.dart';
 
@@ -54,6 +57,18 @@ class AppPages {
       name: AppRoutes.ownerSignup,
       page: () => OwnerSignupView(),
       binding: OwnerSignupBinding()
+
+    ),
+    GetPage(
+      name: AppRoutes.clientRoot,
+      page: () => ClientRootView(),
+      binding: ClientRootBinding(),
+
+    ),
+     GetPage(
+      name: AppRoutes.clientHome,
+      page: () => ClientHomeView(),
+      //binding: ClientRootBinding(),
 
     ),
     

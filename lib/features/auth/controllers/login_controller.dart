@@ -13,8 +13,7 @@ class LoginController extends GetxController {
   void login() {
     // This triggers all validators in the form
     if (loginFormKey.currentState!.validate()) {
-     
-      print("Form is valid! Proceeding...");
+      Get.toNamed('/clientRoot');
     } else {
       print("Form is invalid!");
     }

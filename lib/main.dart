@@ -42,7 +42,7 @@ class MyApp extends StatelessWidget {
       fallbackLocale: const Locale('en'),
 
       // ROUTES
-      initialRoute: AppRoutes.onboarding,
+      initialRoute: AppRoutes.clientRoot,
       getPages: AppPages.pages,
     );
   }

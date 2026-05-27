@@ -6,4 +6,6 @@ class AppRoutes {
   static const signupOnboarding = '/signupOnboarding';
   static const forgotPassword = '/forgotPassword';
   static const verifyCode = '/verifyCode';
+  static const clientRoot = '/clientRoot';
+  static const clientHome = '/clientHome';
 }

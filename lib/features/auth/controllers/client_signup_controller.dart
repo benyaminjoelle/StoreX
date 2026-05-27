@@ -98,6 +98,9 @@ class ClientSignupController extends GetxController {
     }
 
     /// continue logic here
+    Get.toNamed
+    ('/verifyCode');
+    
   }
 
   /// =========================================================

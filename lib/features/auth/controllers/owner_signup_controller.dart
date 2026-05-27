@@ -93,7 +93,7 @@ class OwnerSignupController extends GetxController {
       return;
     }
 
-    /// continue logic here
+
       Get.toNamed('/verifyCode');
   }
 
