@@ -81,6 +81,7 @@ class ForgotPassword extends StatelessWidget {
                     SizedBox(height: media.size.height * 0.03,),
                     PrimaryButton(text: "Send Email".tr, onPressed: () {
                        if (controller.formKey.currentState!.validate()){
+                        controller.email.value = controller.emailController.text.trim();
                         //  controller.sendVerificationEmail();
                         Get.toNamed(AppRoutes.verifyCode);
                     }
