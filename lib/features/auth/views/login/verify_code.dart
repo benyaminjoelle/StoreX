@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:get/get_core/src/get_main.dart';
-
 import 'package:storex/core/utils/validators.dart';
 import 'package:storex/features/auth/controllers/forgot_pass_controller.dart';
+import 'package:storex/features/auth/widgets/change_email.dart';
 import 'package:storex/features/auth/widgets/custom_pin_theme.dart';
 import 'package:storex/widgets/app_snackbar.dart';
 import 'package:storex/widgets/back_button.dart';
@@ -47,73 +47,72 @@ class verifyCode extends StatelessWidget{
                       ),
                     ),
                     Text(
-                      "Verification Code".tr,
+                      "Verify your Email".tr,
                       textAlign: TextAlign.center,
                       style: theme.textTheme.headlineMedium?.copyWith(
                         fontWeight: FontWeight.bold,
                       ),
                     ),
-                       SizedBox(height: media.size.height * 0.01),
-                          Text(
-                            "Please enter the 4-digit code sent to your email.".tr,
+                    Obx(() => Text(
+                            "${"We sent a verification link to".tr} ${controller.email.value}",
+                            textAlign: TextAlign.center,
                             style: theme.textTheme.bodyMedium?.copyWith(
-                              color: theme.textTheme.bodyMedium?.color?.withOpacity(0.7),
+                              color: theme.textTheme.bodyMedium?.color?.withOpacity(0.8),
                             ),
+                          )),
+                      
+                      TextButton(
+                        onPressed: () => EmailBottomSheet.show(context, controller, theme), // Open the change email bottom sheet
+                        child: Text(
+                          "Wrong email? Change it here".tr,
+                          style: theme.textTheme.bodySmall?.copyWith(
+                            color: theme.primaryColor,
+                            // decoration: TextDecoration.underline,
                           ),
+                        ),
+                      ),
+                      
+                      Text(
+                        "Please check your spam folder if you can't find it.".tr,
+                        textAlign: TextAlign.center,
+                        style: theme.textTheme.bodySmall?.copyWith(
+                          color: theme.textTheme.bodySmall?.color?.withOpacity(0.5),
+                        ),
+                      ),
+                       SizedBox(height: media.size.height * 0.01),
+                          // Center(
+                          //   child: Text(
+                          //     "You have received a verification email, please check your spam folder.".tr,
+                          //     textAlign: TextAlign.center,
+                          //     style: theme.textTheme.bodyMedium?.copyWith(
+                          //       color: theme.textTheme.bodyMedium?.color?.withOpacity(0.7),
+                          //     ),
+                          //   ),
+                          // ),
                           
-                          SizedBox(height: media.size.height * 0.06),
+                      //     SizedBox(height: media.size.height * 0.06),
                           
                           // 4. THE DIGIT RECTANGLES (Pinput Widget)
-                          Center(
-                            child: CustomPinTheme(
-                              controller: controller.codeController,
-                              validator: (value) {
-                                if (value == null || value.length < 4) {
-                                  return "Please enter the complete code".tr;
-                                }
-                                return null;
-                              },
-                              onCompleted: (pin) {
-                                // Optionally, you can trigger verification immediately when the user completes entering the code
-                                controller.verifyCode();
-                              },
-                            ),
-                          ),
-                          SizedBox(height: media.size.height *0.01,),
-                          Row(
-                            mainAxisAlignment: MainAxisAlignment.center,
-                            children: [
-                              Text("Didnt receive the code? ".tr,
-                              
-                               style: theme.textTheme.bodyMedium?.copyWith(color: theme.textTheme.bodyMedium?.color?.withOpacity(0.7)),
-                               ),
-
-                            Obx((){
-                               return controller.isResendEnabled.value ?
-                               TextButton(
-                               onPressed: controller.resendCode, 
-                               child: Text("Resend Code".tr,
-                                    style: theme.textTheme.bodyMedium?.copyWith(
-                                    color: theme.primaryColor
-                                    ),
-                                    ),
-                                    )
-                                    : Padding(
-                                      padding: EdgeInsets.symmetric(vertical: media.size.height * 0.01,),
-                                      child: Text("Resend Code in ${controller.secondsRemaining.value}s".tr,
-                                      style: theme.textTheme.bodyMedium?.copyWith(
-                                      color: theme.textTheme.bodyMedium?.color?.withOpacity(0.7)),
-                                      ),
-                                      );
-                            }
-                             
-                            ),
-                            ],
-                          ),
+                          // Center(
+                          //   child: CustomPinTheme(
+                          //     controller: controller.codeController,
+                          //     validator: (value) {
+                          //       if (value == null || value.length < 4) {
+                          //         return "Please enter the complete code".tr;
+                          //       }
+                          //       return null;
+                          //     },
+                          //     onCompleted: (pin) {
+                          //       // Optionally, you can trigger verification immediately when the user completes entering the code
+                          //       controller.verifyCode();
+                          //     },
+                          //   ),
+                          // ),
+                          // SizedBox(height: media.size.height *0.05,),
                         
 
                           SizedBox(height: media.size.height *0.09,),
-                          PrimaryButton(text: "Confirm Code".tr, onPressed: (){
+                          PrimaryButton(text: "I have verified".tr, onPressed: (){
                               // controller.verifyCode();
                               final errorMessage = Validators.validateCode(controller.codeController.text);
                               if (errorMessage != null) {
@@ -128,7 +127,41 @@ class verifyCode extends StatelessWidget{
                               else {
                                  Get.toNamed('/resetPassword');
                               }
-                          })]),
+                          }
+                          ),
+                            Row(
+                            mainAxisAlignment: MainAxisAlignment.center,
+                            children: [
+                              Text("Didnt receive the email? ".tr,
+                              
+                               style: theme.textTheme.bodyMedium?.copyWith(color: theme.textTheme.bodyMedium?.color?.withOpacity(0.7)),
+                               ),
+
+                            Obx((){
+                               return controller.isResendEnabled.value ?
+                               TextButton(
+                               onPressed: controller.resendCode, 
+                               child: Text("Resend email".tr,
+                                    style: theme.textTheme.bodyMedium?.copyWith(
+                                    color: theme.primaryColor
+                                    ),
+                                    ),
+                                    )
+                                    : Padding(
+                                      padding: EdgeInsets.symmetric(vertical: media.size.height * 0.01,),
+                                      child: Text("Resend email in ${controller.secondsRemaining.value}s".tr,
+                                      style: theme.textTheme.bodyMedium?.copyWith(
+                                      color: theme.textTheme.bodyMedium?.color?.withOpacity(0.7)),
+                                      ),
+                                      );
+                            }
+                             
+                            ),
+                            ],
+                          ),
+                        
+                          ]
+                          ),
                  
                     
                 ),

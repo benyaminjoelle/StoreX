@@ -10,8 +10,10 @@ class ForgotPassController extends GetxController{
   final codeController = TextEditingController();
   final newPasswordController = TextEditingController();
   final confirmPasswordController = TextEditingController();
+  final editEmailController = TextEditingController();
   final passwordKey = GlobalKey<FormState>();
   final formKey = GlobalKey<FormState>();
+  var email = "user@example.com".obs; // Your observable email
 
   ThemeData get theme => Get.theme;
 
@@ -63,6 +65,18 @@ class ForgotPassController extends GetxController{
         iconColor: theme.colorScheme.error,
       );
     }
+  }
+  void updateEmailAndResend(String newEmail) {
+    email.value = newEmail;
+    
+    // 1. Call your backend API here to update the email and send a new OTP
+    // apiService.updateEmailAndSendOTP(newEmail);
+    
+    // 2. Restart your resend timer
+    // startTimer(); 
+    
+    // 3. Clear the old code input field
+    codeController.clear();
   }
 
   //------------states -----------------
@@ -119,6 +133,7 @@ class ForgotPassController extends GetxController{
     codeController.dispose();
     newPasswordController.dispose();
     confirmPasswordController.dispose();
+    editEmailController.dispose();
     timer?.cancel();
     super.onClose();
   }
