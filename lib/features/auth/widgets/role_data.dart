@@ -1,14 +1,15 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:storex/features/auth/models/user_model.dart';
 
-enum AccountType { client, warehouseOwner, warehouseStaff }
+
 
 class RoleModel {
   final String title;
   final String description;
   final IconData icon;
   final Color color;
-  final AccountType type;
+  final UserRole type;
 
   const RoleModel({
     required this.title,
@@ -27,7 +28,7 @@ List<RoleModel> getRoles(ColorScheme colors) {
       description: "Order products from warehouses".tr,
       icon: Icons.shopping_bag_outlined,
       color: colors.primary,
-      type: AccountType.client,
+      type: UserRole.client,
     ),
 
     RoleModel(
@@ -35,7 +36,7 @@ List<RoleModel> getRoles(ColorScheme colors) {
       description: "Assist with warehouse operations and inventory management".tr,
       icon: Icons.person_outline,
       color: colors.secondary,
-      type: AccountType.warehouseStaff,
+      type: UserRole.worker,
     ),
     RoleModel(
       title: "Warehouse Owner".tr,
@@ -43,7 +44,7 @@ List<RoleModel> getRoles(ColorScheme colors) {
           "Manage warehouses, storage, and incoming orders".tr,
       icon: Icons.warehouse_outlined,
       color: colors.tertiary,
-      type: AccountType.warehouseOwner,
+      type: UserRole.warehouseAdmin,
     ),
   ];
 }

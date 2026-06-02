@@ -106,16 +106,6 @@ class ClientSignupView extends StatelessWidget {
 
                                   SizedBox(height: media.size.height * 0.03),
 
-                                  /// BUSINESS NAME
-                                  CustomTextField(
-                                    controller: controller.businessNameController,
-                                    label: "Business Name:".tr,
-                                    hint: "Enter your business name".tr,
-                                    textInputAction: TextInputAction.next,
-                                    validator: Validators.nameValidation,
-                                  ),
-
-                                  SizedBox(height: media.size.height * 0.03),
 
                                   /// EMAIL
                                   CustomTextField(

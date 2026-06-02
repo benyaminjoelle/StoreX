@@ -1,21 +1,21 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:storex/core/constants/app_colors.dart';
-import 'package:storex/features/auth/widgets/role_data.dart';
+import 'package:storex/features/auth/models/user_model.dart';
 import 'package:storex/widgets/app_snackbar.dart';
 
 class SignupOnboardingController extends GetxController {
   
-  final Rxn<AccountType> selectedType = Rxn<AccountType>();
+  final Rxn<UserRole> selectedType = Rxn<UserRole>();
 
-  void selectRole(AccountType type) {
+  void selectRole(UserRole type) {
     selectedType.value = type;
   }
   void clearSelection() {
     selectedType.value = null;
   }
 
-  bool isSelected(AccountType type) {
+  bool isSelected(UserRole type) {
     return selectedType.value == type;
   }
 
@@ -32,15 +32,15 @@ if (selected == null) {
 }
 
     switch (selected) {
-      case AccountType.client:
+      case UserRole.client:
         Get.toNamed('/clientSignup');
         break;
 
-      case AccountType.warehouseOwner:
+      case UserRole.warehouseAdmin:
         Get.toNamed('/ownerSignup');
         break;
 
-      case AccountType.warehouseStaff:
+      case UserRole.worker:
        Get.toNamed('/workerSignup');
         break;
     }

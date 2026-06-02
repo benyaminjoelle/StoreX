@@ -1,78 +1,56 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:storex/core/constants/app_colors.dart';
+
+
+import 'package:storex/features/auth/models/auth_repo.dart';
 import 'package:storex/widgets/app_dialog.dart';
 import 'package:storex/widgets/app_snackbar.dart';
 
 class ClientSignupController extends GetxController {
   /// =========================================================
+  /// REPO
+  /// =========================================================
+  final AuthRepo _authRepo = AuthRepo();
+
+  /// =========================================================
   /// FORM KEY
   /// =========================================================
-
   final clientSignupKey = GlobalKey<FormState>();
 
   /// =========================================================
-  /// BASIC INFO CONTROLLERS
+  /// CONTROLLERS
   /// =========================================================
-
   final firstNameController = TextEditingController();
-
   final lastNameController = TextEditingController();
-
-  /// =========================================================
-  /// ACCOUNT INFO CONTROLLERS
-  /// =========================================================
-
   final emailController = TextEditingController();
-
   final phoneController = TextEditingController();
-
   final passwordController = TextEditingController();
-
-  final confirmPasswordController =
-      TextEditingController();
-
-  /// =========================================================
-  /// BUSINESS INFO CONTROLLERS
-  /// =========================================================
-
-  final businessNameController =
-      TextEditingController();
-
-  /// =========================================================
-  /// VERIFICATION CONTROLLERS
-  /// =========================================================
-
+  final confirmPasswordController = TextEditingController();
+ 
   final otpController = TextEditingController();
 
   /// =========================================================
   /// OBSERVABLES
   /// =========================================================
-
   final isPasswordHidden = true.obs;
-
   final isConfirmPasswordHidden = true.obs;
-
   final isLoading = false.obs;
 
   ThemeData get theme => Get.theme;
 
   /// =========================================================
-  /// VALIDATIONS
+  /// VALIDATION
   /// =========================================================
-
   bool validateClient() {
-    return clientSignupKey.currentState
-            ?.validate() ??
-        false;
+    return clientSignupKey.currentState?.validate() ?? false;
   }
 
   /// =========================================================
-  /// PASSWORD VISIBILITY
+  /// PASSWORD TOGGLE
   /// =========================================================
-
   void togglePasswordVisibility() {
-    isPasswordHidden.value =
-        !isPasswordHidden.value;
+    isPasswordHidden.value = !isPasswordHidden.value;
   }
 
   void toggleConfirmPasswordVisibility() {
@@ -81,37 +59,86 @@ class ClientSignupController extends GetxController {
   }
 
   /// =========================================================
-  /// SIGNUP FLOW
+  /// SIGNUP FLOW (REAL)
   /// =========================================================
-
-  void continueToVerify() {
+ 
+  Future<void> continueToVerify() async {
     if (!validateClient()) {
       AppSnackbar.show(
         title: "Invalid Data".tr,
         message: "Please check your inputs".tr,
         icon: Icons.warning_amber_rounded,
-        iconColor: theme.colorScheme.error,
+        iconColor: AppColors.error,
       );
-
       return;
     }
 
-    /// continue logic here
-    Get.toNamed
-    ('/verifyCode');
-    
+    try {
+      isLoading.value = true;
+
+      final userData = {
+        'first_name': firstNameController.text.trim(),
+        'last_name': lastNameController.text.trim(),
+        'email': emailController.text.trim(),
+        'phone_number': phoneController.text.trim(),
+
+        'password': passwordController.text,
+        /// IMPORTANT
+        'role': 'client',
+
+        /// Backend wants this
+        'language_preference':
+            Get.locale?.languageCode ?? 'en',
+      };
+
+      print("════════ REGISTER OWNER ════════");
+      print("📤 Sending:");
+      print(userData);
+
+      final user = await _authRepo.register(
+        userData,
+      );
+
+      print("✅ Registration Success");
+      print("🆔 User ID: ${user.id}");
+      print("📧 Email: ${user.email}");
+      print("🎭 Role: ${user.role}");
+
+      AppSnackbar.show(
+        title: "Success".tr,
+        message: "Account created successfully".tr,
+        icon: Icons.check_circle_outline,
+        iconColor: Colors.green,
+      );
+
+      Get.toNamed(
+        '/verifyCode',
+        arguments: {
+          'email': user.email,
+        },
+      );
+    } catch (e) {
+      print("❌ Registration Error: $e");
+
+      AppSnackbar.show(
+        title: "Error".tr,
+        message: e.toString(),
+        icon: Icons.error_outline,
+        iconColor: AppColors.error,
+      );
+    } finally {
+      isLoading.value = false;
+    }
   }
 
   /// =========================================================
   /// BACK BUTTON
   /// =========================================================
-
   Future<void> handleBack() async {
-    final result =
-        await AppDialogs.showConfirmDialog(
+    final result = await AppDialogs.showConfirmDialog(
       title: "Exit signup?".tr,
       message:
-          "Your progress will be lost if you leave now.",
+          "Your progress will be lost if you leave now.".tr,
       confirmText: "Exit",
       confirmColor: theme.colorScheme.error,
     );
@@ -122,25 +149,17 @@ class ClientSignupController extends GetxController {
   }
 
   /// =========================================================
-  /// LIFECYCLE
+  /// DISPOSE
   /// =========================================================
-
   @override
   void onClose() {
-    /// BASIC INFO
     firstNameController.dispose();
     lastNameController.dispose();
-
-    /// ACCOUNT INFO
     emailController.dispose();
     phoneController.dispose();
     passwordController.dispose();
     confirmPasswordController.dispose();
-
-    /// BUSINESS INFO
-    businessNameController.dispose();
-
-    /// VERIFICATION
+   
     otpController.dispose();
 
     super.onClose();

@@ -43,12 +43,12 @@ class AppPages {
      GetPage(
       name: AppRoutes.verifyCode,
       page: () => const verifyCode(),
-      // binding: ForgotPassBinding(),
+      binding: ForgotPassBinding(),
     ),
     GetPage(
       name: AppRoutes.resetPassword,
       page: () => const ResetPassword(),
-      // binding: ForgotPassBinding(),
+      binding: ForgotPassBinding(),
     ),
     GetPage(
       name: AppRoutes.signupOnboarding,

@@ -24,7 +24,7 @@ class DioClient {
             options.headers['Authorization'] = 'Bearer $token';
           }
 
-          final lang = await PrefHelper.getLanguage() ?? 'en';
+          final lang = await PrefHelper.getLanguage() ;
           options.headers['Accept-Language'] = lang;
 
           print('➡️ [DioClient] Request: ${options.method} ${options.uri}');
