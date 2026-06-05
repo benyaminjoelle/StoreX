@@ -49,9 +49,12 @@ class ApiService {
           handler.next(response);
         },
         onError: (DioException e, handler) {
-          print('❌ ERROR [${e.response?.statusCode}] ${e.requestOptions.uri}');
-          print('❌ Data: ${e.response?.data}');
-          handler.next(e);
+         print('TYPE: ${e.type}');
+  print('MESSAGE: ${e.message}');
+  print('ERROR: ${e.error}');
+  print('STATUS: ${e.response?.statusCode}');
+  print('DATA: ${e.response?.data}');
+  handler.next(e);
         },
       ),
     );

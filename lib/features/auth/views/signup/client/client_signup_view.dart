@@ -105,7 +105,15 @@ class ClientSignupView extends StatelessWidget {
                                   ),
 
                                   SizedBox(height: media.size.height * 0.03),
+ CustomTextField(
+                                    controller: controller.businessNameController,
+                                    label: "Business Name:".tr,
+                                    hint: "Enter your Business name".tr,
+                                    textInputAction: TextInputAction.next,
+                                    validator: Validators.nameValidation,
+                                  ),
 
+                                  SizedBox(height: media.size.height * 0.03),
 
                                   /// EMAIL
                                   CustomTextField(
@@ -141,7 +149,7 @@ class ClientSignupView extends StatelessWidget {
                                       isObscure: controller.isPasswordHidden.value,
                                       onToggleVisibility:
                                           controller.togglePasswordVisibility,
-                                      textInputAction: TextInputAction.done,
+                                      textInputAction: TextInputAction.next,
                                       validator: (value) =>
                                           Validators.passwordValidation(value),
                                     ),

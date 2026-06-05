@@ -23,6 +23,8 @@ class ClientSignupController extends GetxController {
   /// =========================================================
   final firstNameController = TextEditingController();
   final lastNameController = TextEditingController();
+  final businessNameController = TextEditingController();
+
   final emailController = TextEditingController();
   final phoneController = TextEditingController();
   final passwordController = TextEditingController();
@@ -81,21 +83,17 @@ class ClientSignupController extends GetxController {
         'last_name': lastNameController.text.trim(),
         'email': emailController.text.trim(),
         'phone_number': phoneController.text.trim(),
-
+        'business_name':businessNameController.text.trim(),
         'password': passwordController.text,
         /// IMPORTANT
         'role': 'client',
-
-        /// Backend wants this
-        'language_preference':
-            Get.locale?.languageCode ?? 'en',
       };
 
       print("════════ REGISTER OWNER ════════");
       print("📤 Sending:");
       print(userData);
 
-      final user = await _authRepo.register(
+      final user = await _authRepo.clientRegister(
         userData,
       );
 
@@ -115,6 +113,7 @@ class ClientSignupController extends GetxController {
         '/verifyCode',
         arguments: {
           'email': user.email,
+          'password':user.password
         },
       );
     } catch (e) {

@@ -96,22 +96,19 @@ class OwnerSignupController extends GetxController {
 
         'password': passwordController.text,
 
-        'password_confirmation':
-            confirmPasswordController.text,
+        
 
         /// IMPORTANT
         'role': 'warehouse_admin',
 
-        /// Backend wants this
-        'language_preference':
-            Get.locale?.languageCode ?? 'en',
+       
       };
 
       print("════════ REGISTER OWNER ════════");
       print("📤 Sending:");
       print(userData);
 
-      final user = await _authRepo.register(
+      final user = await _authRepo.managerRegister(
         userData,
       );
 
@@ -126,11 +123,15 @@ class OwnerSignupController extends GetxController {
         icon: Icons.check_circle_outline,
         iconColor: Colors.green,
       );
+      print("════════ NAVIGATION DATA ════════");
+print("EMAIL = ${user.email}");
+print("PASSWORD = ${passwordController.text}");
 
       Get.toNamed(
         '/verifyCode',
         arguments: {
           'email': user.email,
+          'password':passwordController.text
         },
       );
     } catch (e) {

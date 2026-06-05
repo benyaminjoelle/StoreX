@@ -4,7 +4,7 @@ import 'package:get/get_core/src/get_main.dart';
 import 'package:storex/core/utils/validators.dart';
 import 'package:storex/features/auth/controllers/forgot_pass_controller.dart';
 import 'package:storex/features/auth/widgets/change_email.dart';
-import 'package:storex/features/auth/widgets/custom_pin_theme.dart';
+
 import 'package:storex/widgets/app_snackbar.dart';
 import 'package:storex/widgets/back_button.dart';
 import 'package:storex/widgets/primary_button.dart';
@@ -112,23 +112,12 @@ class verifyCode extends StatelessWidget{
                         
 
                           SizedBox(height: media.size.height *0.09,),
-                          PrimaryButton(text: "I have verified".tr, onPressed: (){
-                              // controller.verifyCode();
-                              final errorMessage = Validators.validateCode(controller.codeController.text);
-                              if (errorMessage != null) {
-                               AppSnackbar.show(
-                                  position: SnackPosition.TOP,
-                                  title: "Invalid Code".tr,
-                                  message: errorMessage,
-                                  icon: Icons.error_outline,
-                                  iconColor: theme.colorScheme.error,
-                                );
-                              }
-                              else {
-                                 Get.toNamed('/resetPassword');
-                              }
-                          }
-                          ),
+                         PrimaryButton(
+  text: "I have verified".tr,
+  onPressed: () {
+    controller.verifyEmail();
+  },
+),
                             Row(
                             mainAxisAlignment: MainAxisAlignment.center,
                             children: [

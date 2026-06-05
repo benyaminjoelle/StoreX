@@ -78,7 +78,7 @@ class EmailBottomSheet {
                     return;
                   }
                   
-                  controller.updateEmailAndResend(inputEmail);
+                  controller.changeEmail(inputEmail);
                   Get.back(); 
                   
                   AppSnackbar.show(
