@@ -10,4 +10,5 @@ class AppRoutes {
   static const clientRoot = '/clientRoot';
   static const clientHome = '/clientHome';
   static const resetPassword = '/resetPassword';
+  static const userverification = '/userVerification';
 }

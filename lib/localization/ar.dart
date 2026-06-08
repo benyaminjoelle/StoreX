@@ -1,6 +1,7 @@
 const Map<String, String> ar = {
   //A
    "Already have an account?":'لديك حساب مسبق؟',
+   "Assist with warehouse operations and inventory management":'مساعدة في عمليات المستودع وإدارة المخزون',
    "A new code has been sent successfully!": "تم إرسال رمز جديد بنجاح!",
    "A new verification email has been sent.": "تم إرسال بريد إلكتروني جديد للتحقق.",
   //B
@@ -101,6 +102,7 @@ const Map<String, String> ar = {
    "Please check your inputs":"الرجاء مراجعة مدخلاتك",
   //Q
   //R
+  "Registration Error.": ".خطأ في التسجيل",
    "Resend email": "إعادة إرسال البريد",
    "Resend email in @seconds s": "إعادة إرسال البريد خلال @seconds ثانية",
    "Reset Password": "إعادة تعيين كلمة المرور",
@@ -126,6 +128,7 @@ const Map<String, String> ar = {
    "Verification Failed": "فشل التحقق",
   //W
    "Welcome Back!": "مرحبًا بعودتك!",
+   "Warehouse Staff":"موظف مستودع",
    "Warehouse Owner": "صاحب مستودع",
    "We will send a new verification code to this email address.": "سوف نرسل رمز تحقق جديد إلى هذا البريد الإلكتروني.",
    "We will send you an email with instructions to reset your password.": "سوف نرسل لك بريدًا إلكترونيًا يحتوي على تعليمات لإعادة تعيين كلمة المرور الخاصة بك.",

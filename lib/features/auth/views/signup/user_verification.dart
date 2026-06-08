@@ -1,20 +1,28 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:get/get_core/src/get_main.dart';
-import 'package:storex/features/auth/controllers/forgot_pass_controller.dart';
+import 'package:storex/features/auth/controllers/signup_onboarding_controller.dart';
 import 'package:storex/features/auth/widgets/change_email.dart';
 import 'package:storex/widgets/back_button.dart';
 import 'package:storex/widgets/primary_button.dart';
 
-class verifyCode extends StatelessWidget{
-  const verifyCode({super.key});
+class UserVerification extends StatelessWidget{
+  const UserVerification({super.key});
 
   @override
   Widget build(BuildContext context) {
     final theme = Theme.of(context);
     final media = MediaQuery.of(context);
     final String backgroundImage = 'assets/photos/forgot_pass.png';
-    final controller = Get.find<ForgotPassController>();
+    final controller = Get.find<SignupOnboardingController>();
+    /// Capture parameters passed from the respective signup screen
+    final Map<String, dynamic> args = Get.arguments ?? {};
+    final RxString userEmail = (args['email'] as RxString?) ?? ''.obs;
+    final VoidCallback onVerify = args['onVerify'] ?? () {};
+    final VoidCallback onResend = args['onResend'] ?? () {};
+    final RxBool isResendEnabled = (args['isResendEnabled'] as RxBool?) ?? true.obs;
+    final RxInt secondsRemaining = (args['secondsRemaining'] as RxInt?) ?? 0.obs;
+    
    
 
   return GestureDetector(
@@ -50,10 +58,11 @@ class verifyCode extends StatelessWidget{
                         fontWeight: FontWeight.bold,
                       ),
                     ),
+                    SizedBox(height: media.size.height * 0.02,),
                  Obx(  
                       () => Text(
                         'verification_link_sent'.trParams({
-                          'email': controller.email.value,
+                          'email': userEmail.value,
                         }),
                         textAlign: TextAlign.center,
                         style: theme.textTheme.bodyMedium?.copyWith(
@@ -62,7 +71,7 @@ class verifyCode extends StatelessWidget{
                       ),
                     ),
                       TextButton(
-                        onPressed: () => EmailBottomSheet.show(context, controller, theme), // Open the change email bottom sheet
+                        onPressed: () => EmailBottomSheet.show(context,args['controller'], theme),
                         child: Text(
                           "Wrong email? Change it here".tr,
                           style: theme.textTheme.bodySmall?.copyWith(
@@ -84,9 +93,7 @@ class verifyCode extends StatelessWidget{
                           SizedBox(height: media.size.height *0.09,),
                           PrimaryButton(
                               text: "I have verified".tr,
-                              onPressed: () {
-                                controller.verifyEmail();
-                              },
+                              onPressed: onVerify,
                             ),
                             Row(
                             mainAxisAlignment: MainAxisAlignment.center,
@@ -97,9 +104,9 @@ class verifyCode extends StatelessWidget{
                                ),
                             //the 
                             Obx((){
-                               return controller.isResendEnabled.value ?
+                               return isResendEnabled.value ?
                                TextButton(
-                               onPressed: controller.resendCode, 
+                               onPressed: onResend,
                                child: Text("Resend email".tr,
                                     style: theme.textTheme.bodyMedium?.copyWith(
                                     color: theme.primaryColor
@@ -112,13 +119,13 @@ class verifyCode extends StatelessWidget{
                                       ),
                                       child: Text(
                                         'resend_email_in'.trParams({
-                                          'seconds': controller.secondsRemaining.value.toString(),
+                                          'seconds': secondsRemaining.value.toString(),
                                         }),
                                         style: theme.textTheme.bodyMedium?.copyWith(
                                           color: theme.textTheme.bodyMedium?.color?.withOpacity(0.7),
                                         ),
                                       ),
-);
+                                  );
                             }
                              
                             ),

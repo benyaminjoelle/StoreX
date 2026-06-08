@@ -1,3 +1,5 @@
+import 'dart:async';
+
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:storex/core/constants/app_colors.dart';
@@ -32,6 +34,15 @@ class ClientSignupController extends GetxController {
  
   final otpController = TextEditingController();
 
+  // =========================================================
+  /// VERIFICATION DATA & STATE (REQUIRED FOR USERVERIFICATION VIEW)
+  /// =========================================================
+  /// 
+  final registeredEmail = ''.obs; //  Track the successfully registered email as an RxString
+  final isResendEnabled = true.obs; 
+  final secondsRemaining = 60.obs;
+  Timer? _timer;
+
   /// =========================================================
   /// OBSERVABLES
   /// =========================================================
@@ -61,7 +72,7 @@ class ClientSignupController extends GetxController {
   }
 
   /// =========================================================
-  /// SIGNUP FLOW (REAL)
+  /// REGISTER
   /// =========================================================
  
   Future<void> continueToVerify() async {
@@ -110,10 +121,15 @@ class ClientSignupController extends GetxController {
       );
 
       Get.toNamed(
-        '/verifyCode',
+        '/userverification',
         arguments: {
           'email': user.email,
-          'password':user.password
+          'password':user.password,
+          'isResendEnabled': isResendEnabled,
+          'secondsRemaining': secondsRemaining,
+          'controller': this, // Passes instance for the dynamic bottom sheet type fallback
+          'onVerify': () => verifyEmail(),
+          'onResend': () => resendCode(),
         },
       );
     } catch (e) {
@@ -128,6 +144,57 @@ class ClientSignupController extends GetxController {
     } finally {
       isLoading.value = false;
     }
+  }
+  Future<void> verifyEmail() async {
+    try {
+      isLoading.value = true;
+      print("🔍 Verifying email status for: ${registeredEmail.value}");
+      
+      // Call backend API check to verify link status or token
+      // bool isVerified = await _authRepo.checkEmailVerification(registeredEmail.value);
+      
+      // Temporary check simulation:
+      AppSnackbar.show(title: "Status Check".tr, message: "Checking your verification state...".tr);
+    } catch (e) {
+      AppSnackbar.show(title: "Error".tr, message: e.toString(), iconColor: AppColors.error);
+    } finally {
+      isLoading.value = false;
+    }
+  }
+
+  Future<void> resendCode() async {
+    if (!isResendEnabled.value) return;
+
+    try {
+      print("📩 Requesting code resend to: ${registeredEmail.value}");
+      // await _authRepo.resendVerificationEmail(registeredEmail.value);
+      
+      AppSnackbar.show(
+        title: "Sent".tr,
+        message: "A new verification link has been sent.".tr,
+        icon: Icons.email_outlined,
+        iconColor: AppColors.primary,
+      );
+      
+      startResendTimer(); // Reset the timer countdown
+    } catch (e) {
+      AppSnackbar.show(title: "Error".tr, message: e.toString(), iconColor: AppColors.error);
+    }
+  }
+
+  void startResendTimer() {
+    isResendEnabled.value = false;
+    secondsRemaining.value = 60;
+    _timer?.cancel();
+    
+    _timer = Timer.periodic(const Duration(seconds: 1), (timer) {
+      if (secondsRemaining.value > 0) {
+        secondsRemaining.value--;
+      } else {
+        isResendEnabled.value = true;
+        _timer?.cancel();
+      }
+    });
   }
 
   /// =========================================================

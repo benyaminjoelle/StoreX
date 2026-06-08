@@ -3,6 +3,7 @@ const Map<String, String> en = {
    "A new code has been sent successfully!": "A new code has been sent successfully!",
    "A new verification email has been sent.": "A new verification email has been sent.",
    "Already have an account?":"Already have an account?",
+   "Assist with warehouse operations and inventory management":"Assist with warehouse operations and inventory management",
   //B
     "By continuing, you agree to our Terms of Service and Privacy Policy.":"By continuing, you agree to our Terms of Service and Privacy Policy.",
 
@@ -83,6 +84,7 @@ const Map<String, String> en = {
 
   //Q
   //R
+    "Registration Error.": "Registration Error.",
     "Resend Code": "Resend Code",
     "resend_email_in": "Resend email in @seconds s",
     "Reset Password": "Reset Password",
@@ -106,6 +108,7 @@ const Map<String, String> en = {
    "Verification Failed": "Verification Failed",
   //W
    "Welcome Back!": "Welcome Back!",
+   "Warehouse Staff":"Warehouse Staff",
    "Warehouse Owner":"Warehouse Owner",
    "We will send a new verification code to this email address.":"We will send a new verification code to this email address.",
    "We will send you an email with instructions to reset your password.":"We will send you an email with instructions to reset your password.",

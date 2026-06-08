@@ -190,7 +190,7 @@ class WorkerSignupView extends StatelessWidget {
                                     text: "Continue".tr,
                                     onPressed: () {
                                       controller.validateWorker();
-                                      Get.toNamed('/verifyCode');
+                                      Get.toNamed('/userverifcation');
                                     },
                                   ),
 

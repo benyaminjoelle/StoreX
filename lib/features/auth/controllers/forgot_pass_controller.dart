@@ -16,7 +16,7 @@ class ForgotPassController extends GetxController {
   final passwordKey = GlobalKey<FormState>();
   final formKey = GlobalKey<FormState>();
   var password = '';
-  var email = "user@example.com".obs; // Your observable email
+  var email = "user@example.com".obs; 
 
   ThemeData get theme => Get.theme;
 
@@ -89,7 +89,7 @@ Future<void> changeEmail(String newEmail) async {
   } catch (e) {
     AppSnackbar.show(
       position: SnackPosition.TOP,
-      title: "Error",
+      title: "Error".tr,
       message: e.toString(),
       icon: Icons.error_outline,
       iconColor: theme.colorScheme.error,

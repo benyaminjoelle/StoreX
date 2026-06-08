@@ -6,6 +6,7 @@ class LoginController extends GetxController {
   // Text controllers
   final emailController = TextEditingController();
   final passwordController = TextEditingController();
+  final isLoading = false.obs;
 
   // UI state
   final isPasswordHidden = true.obs;
@@ -18,6 +19,7 @@ class LoginController extends GetxController {
       print("Form is invalid!");
     }
   }
+ 
 
   void togglePasswordVisibility() {
     isPasswordHidden.value = !isPasswordHidden.value;

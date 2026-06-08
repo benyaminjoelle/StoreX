@@ -109,13 +109,15 @@ class Login extends StatelessWidget {
                       
                       SizedBox(height: media.size.height * 0.02),
                       
-                      PrimaryButton(
+                   Obx(()=>  PrimaryButton(
                         text: "Login".tr,
+                        isLoading: controller.isLoading.value,
                         onPressed: () {
                           controller.login();
                         },
                       ),
 
+                   ),
                       // SizedBox(height: media.size.height * 0.01),
                       Row(
                         mainAxisAlignment: MainAxisAlignment.center,
