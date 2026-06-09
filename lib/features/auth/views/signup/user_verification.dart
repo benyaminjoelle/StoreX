@@ -1,86 +1,62 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:get/get_core/src/get_main.dart';
-import 'package:storex/features/auth/controllers/signup_onboarding_controller.dart';
+import 'package:storex/features/auth/controllers/user_verification_controller.dart';
 import 'package:storex/features/auth/widgets/change_email.dart';
 import 'package:storex/widgets/back_button.dart';
 import 'package:storex/widgets/primary_button.dart';
 
-class UserVerification extends StatelessWidget{
+class UserVerification extends GetView<UserVerificationController> {
   const UserVerification({super.key});
 
   @override
   Widget build(BuildContext context) {
     final theme = Theme.of(context);
     final media = MediaQuery.of(context);
-    final String backgroundImage = 'assets/photos/forgot_pass.png';
-    final controller = Get.find<SignupOnboardingController>();
-    /// Capture parameters passed from the respective signup screen
-    final Map<String, dynamic> args = Get.arguments ?? {};
-    final RxString userEmail = (args['email'] as RxString?) ?? ''.obs;
-    final VoidCallback onVerify = args['onVerify'] ?? () {};
-    final VoidCallback onResend = args['onResend'] ?? () {};
-    final RxBool isResendEnabled = (args['isResendEnabled'] as RxBool?) ?? true.obs;
-    final RxInt secondsRemaining = (args['secondsRemaining'] as RxInt?) ?? 0.obs;
-    
-   
+    const String backgroundImage = 'assets/photos/forgot_pass.png';
 
-  return GestureDetector(
-    onTap: () => FocusScope.of(context).unfocus(),
-    child: Scaffold(
+    return GestureDetector(
+      onTap: () => FocusScope.of(context).unfocus(),
+      child: Scaffold(
         backgroundColor: theme.scaffoldBackgroundColor,
         body: CustomScrollView(
           slivers: [
             SliverFillRemaining(
               hasScrollBody: false,
               child: SafeArea(
-                child: GestureDetector(
-                onTap: () => FocusScope.of(context).unfocus(),
-    
                 child: Padding(
-                  padding: EdgeInsets.symmetric(horizontal: media.size.width * 0.05, vertical: media.size.height * 0.02),
+                  padding: EdgeInsets.symmetric(
+                    horizontal: media.size.width * 0.05, 
+                    vertical: media.size.height * 0.02
+                  ),
                   child: Column(
-                    // crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
-                    CustomBackButton(),
-                    Center(
-                      child: ClipRRect(
-                        child: Image.asset(backgroundImage,
-                        height:media.size.height * 0.3,
-                        fit: BoxFit.contain,),
-                        
+                      const CustomBackButton(),
+                      Center(
+                        child: ClipRRect(
+                          child: Image.asset(
+                            backgroundImage,
+                            height: media.size.height * 0.3,
+                            fit: BoxFit.contain,
+                          ),
+                        ),
                       ),
-                    ),
-                    Text(
-                      "Verify your Email".tr,
-                      textAlign: TextAlign.center,
-                      style: theme.textTheme.headlineMedium?.copyWith(
-                        fontWeight: FontWeight.bold,
+                      Text(
+                        "Verify your Email".tr,
+                        textAlign: TextAlign.center,
+                        style: theme.textTheme.headlineMedium?.copyWith(fontWeight: FontWeight.bold),
                       ),
-                    ),
-                    SizedBox(height: media.size.height * 0.02,),
-                 Obx(  
-                      () => Text(
-                        'verification_link_sent'.trParams({
-                          'email': userEmail.value,
-                        }),
+                      SizedBox(height: media.size.height * 0.02),
+                      Obx(() => Text(
+                        'verification_link_sent'.trParams({'email': controller.email.value}),
                         textAlign: TextAlign.center,
                         style: theme.textTheme.bodyMedium?.copyWith(
                           color: theme.textTheme.bodyMedium?.color?.withOpacity(0.8),
                         ),
-                      ),
-                    ),
+                      )),
                       TextButton(
-                        onPressed: () => EmailBottomSheet.show(context,args['controller'], theme),
-                        child: Text(
-                          "Wrong email? Change it here".tr,
-                          style: theme.textTheme.bodySmall?.copyWith(
-                            color: theme.primaryColor,
-                            // decoration: TextDecoration.underline,
-                          ),
-                        ),
+                        onPressed: () => EmailBottomSheet.show(context, controller, theme),
+                        child: Text("Wrong email? Change it here".tr, style: TextStyle(color: theme.primaryColor)),
                       ),
-                      
                       Text(
                         "Please check your spam folder if you can't find it.".tr,
                         textAlign: TextAlign.center,
@@ -88,62 +64,41 @@ class UserVerification extends StatelessWidget{
                           color: theme.textTheme.bodySmall?.color?.withOpacity(0.5),
                         ),
                       ),
-                       SizedBox(height: media.size.height * 0.01),
-                      
-                          SizedBox(height: media.size.height *0.09,),
-                          PrimaryButton(
-                              text: "I have verified".tr,
-                              onPressed: onVerify,
-                            ),
-                            Row(
-                            mainAxisAlignment: MainAxisAlignment.center,
-                            children: [
-                              Text("Didnt receive the email? ".tr,
-                              
-                               style: theme.textTheme.bodyMedium?.copyWith(color: theme.textTheme.bodyMedium?.color?.withOpacity(0.7)),
-                               ),
-                            //the 
-                            Obx((){
-                               return isResendEnabled.value ?
-                               TextButton(
-                               onPressed: onResend,
-                               child: Text("Resend email".tr,
-                                    style: theme.textTheme.bodyMedium?.copyWith(
-                                    color: theme.primaryColor
+                      const Spacer(), // Replaces hardcoded layouts cleanly
+                      Obx(() => PrimaryButton(
+                        text: "I have verified".tr,
+                        isLoading: controller.isLoading.value,
+                        onPressed: controller.verifyEmail,
+                      )),
+                      const SizedBox(height: 16),
+                      Row(
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        children: [
+                          Text("Didn't receive the email? ".tr, style: TextStyle(color: theme.textTheme.bodyMedium?.color?.withOpacity(0.7))),
+                          Obx(() {
+                            return controller.isResendEnabled.value
+                                ? TextButton(
+                                    onPressed: controller.resendCode,
+                                    child: Text("Resend email".tr, style: TextStyle(color: theme.primaryColor)),
+                                  )
+                                : Padding(
+                                    padding: EdgeInsets.symmetric(vertical: media.size.height * 0.01),
+                                    child: Text(
+                                      'resend_email_in'.trParams({'seconds': controller.secondsRemaining.value.toString()}),
+                                      style: TextStyle(color: theme.textTheme.bodyMedium?.color?.withOpacity(0.7)),
                                     ),
-                                    ),
-                                    )
-                                    :Padding(
-                                      padding: EdgeInsets.symmetric(
-                                        vertical: media.size.height * 0.01,
-                                      ),
-                                      child: Text(
-                                        'resend_email_in'.trParams({
-                                          'seconds': secondsRemaining.value.toString(),
-                                        }),
-                                        style: theme.textTheme.bodyMedium?.copyWith(
-                                          color: theme.textTheme.bodyMedium?.color?.withOpacity(0.7),
-                                        ),
-                                      ),
                                   );
-                            }
-                             
-                            ),
-                            ],
-                          ),
-                        
-                          ]
-                          ),
-                 
-                    
+                          }),
+                        ],
+                      ),
+                    ],
+                  ),
                 ),
-              
+              ),
+            ),
+          ],
         ),
-         
-      )
       ),
-      ]),
-      ),
-  );
+    );
   }
 }

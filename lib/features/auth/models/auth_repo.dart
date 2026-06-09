@@ -6,6 +6,7 @@ import 'package:storex/features/auth/models/user_model.dart';
 
 class AuthRepo {
   final ApiService _api = ApiService();
+  final baseUrl = 'http://${ConstIp().ip}:8000';
 
   Future<UserModel> managerRegister(
   Map<String, dynamic> userData,
@@ -271,6 +272,46 @@ class AuthRepo {
     );
   }
 }
+///========================LOGIN============================
+Future<UserModel> login({
+    required String loginIdentifier, // Can be phone number based on spec example
+    required String password,
+  }) async {
+    try {
+      print('════════ STANDARD LOGIN START ════════');
+      
+      // Must be Multipart/Form-Data as specified by OpenAPI
+      final FormData formData = FormData.fromMap({
+        'login': loginIdentifier,
+        'password': password,
+      });
+
+      final response = await _api.post('$baseUrl/api/login', formData);
+      print('📥 Raw Response: $response');
+
+      if (response is ApiError) throw response;
+      if (response is! Map<String, dynamic>) {
+        throw ApiError(message: 'Invalid response from server');
+      }
+
+      final userJson = response['user'];
+      final token = response['token'];
+
+      if (userJson == null) {
+        throw ApiError(message: response['message'] ?? 'User data not found');
+      }
+
+      return UserModel.fromJson(userJson, token: token);
+    } on DioException catch (e) {
+      throw ApiError(
+        message: e.response?.data?['message'] ?? 'Login failed',
+      );
+    } catch (e) {
+      if (e is ApiError) rethrow;
+      throw ApiError(message: 'Login failed');
+    }
+  }
+  ///=================VERIFIED LOGIN=========================???
 Future<UserModel> verifiedLogin({
   required String email,
   required String password,
@@ -365,6 +406,7 @@ Future<UserModel> verifiedLogin({
     );
   }
 }
+///============================================================
 Future<void> resendVerificationEmail({
   required String email,
 }) async {
@@ -411,6 +453,7 @@ Future<void> resendVerificationEmail({
     );
   }
 }
+///==================cHANGE EMAIL======================
 Future<void> changeEmail({
   required int userId,
   required String email,
@@ -449,4 +492,5 @@ Future<void> changeEmail({
     );
   }
 }
+///=============================================================
 }

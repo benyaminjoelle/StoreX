@@ -166,13 +166,16 @@ class OwnerSignupView extends StatelessWidget {
                                   SizedBox(height: media.size.height * 0.04),
 
                                   /// BUTTON
-                                  PrimaryButton(
+                                  Obx(()=>
+                                   PrimaryButton(
                                     text: "Continue".tr,
+                                    isLoading: controller.isLoading.value,
                                     onPressed: () {
                                       controller.continueToVerify();
                                     },
                                   ),
-
+                                  ),
+                                 
                                   Row(
                                     mainAxisAlignment: MainAxisAlignment.center,
                                     children: [

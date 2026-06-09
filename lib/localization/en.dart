@@ -27,6 +27,7 @@ const Map<String, String> en = {
     "Email verified successfully":"Email verified successfully",
     'Enter Email or Phone number':'Enter Email or Phone number',
     "Enter your email address":"Enter your email address",
+    "Enter your national ID":"Enter your national ID",
     'Enter your password':'Enter your password',
     "Enter your new password": "Enter your new password",
     "Error":"Error",
@@ -52,6 +53,8 @@ const Map<String, String> en = {
   //M
     "Manage warehouses, storage, and incoming orders ":"Manage warehouses, storage, and incoming orders ",
   //N
+    "National ID:": "National ID:",
+    'National ID must be exactly 10 digits': 'National ID must be exactly 10 digits',
     "New Email Address":"New Email Address",
     "New Password": "New Password",
     "Confirm Password": "Confirm Password",
@@ -67,6 +70,7 @@ const Map<String, String> en = {
    'Please confirm your password':'Please confirm your password',
    "Please check your spam folder if you can't find it.":"Please check your spam folder if you can't find it.",
    "Please ensure your password meets the requirements and both fields match.":"Please ensure your password meets the requirements and both fields match.",
+   'Please Enter Email or Phone number':'Please Enter Email or Phone number',
    'Please Enter a valid Email address':'Please Enter a valid Email address',
    'Please Enter Phone Number': 'Please Enter Phone Number',
    'Please Enter The Password':'Please Enter The Password',

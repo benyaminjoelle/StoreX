@@ -107,6 +107,18 @@ static String? emailOrPhoneValidation(String? value) {
   // Note: We trim it in case the user added accidental spaces
   return phoneValidation(value.trim());
 }
+static String? nationalIdValidation(String? value) {
+  if (value == null || value.trim().isEmpty) {
+    return 'Required'.tr;
+  }
+
+ 
+  if (!RegExp(r'^\d{10}$').hasMatch(value)) {
+    return 'National ID must be exactly 10 digits'.tr;
+  }
+
+  return null;
+}
 
 static String? validateCode(String? value) {
     if (value == null || value.isEmpty) {

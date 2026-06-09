@@ -4,18 +4,18 @@ import 'package:storex/features/auth/bindings/client_signup_binding.dart';
 import 'package:storex/features/auth/bindings/forgot_pass_binding.dart';
 import 'package:storex/features/auth/bindings/login_binding.dart';
 import 'package:storex/features/auth/bindings/owner_signup_binding.dart';
-import 'package:storex/features/auth/bindings/singup_onboarding_binding.dart';
+import 'package:storex/features/auth/bindings/signup_onboarding_binding.dart';
 import 'package:storex/features/auth/bindings/worker_signup_binding.dart';
 import 'package:storex/features/auth/views/login/reset_password.dart';
 
 import 'package:storex/features/auth/views/signup/client/client_signup_view.dart';
 import 'package:storex/features/auth/views/signup/user_verification.dart';
-import 'package:storex/features/auth/views/signup/worker/worker_signup.dart';
+import 'package:storex/features/auth/views/signup/worker/worker_signup_view.dart';
 import 'package:storex/features/auth/views/signup/owner/owner_signup_view.dart';
 import 'package:storex/features/auth/views/signup/signup_onboarding.dart';
 import 'package:storex/features/auth/views/login/forgot_password.dart';
 
-import 'package:storex/features/auth/views/login/verify_code.dart';
+import 'package:storex/features/auth/views/login/verify_email.dart';
 
 import 'package:storex/features/auth/views/login/login.dart';
 import 'package:storex/features/client/home/client_home_view.dart';
@@ -42,9 +42,14 @@ class AppPages {
       binding: ForgotPassBinding(),
     ),
      GetPage(
-      name: AppRoutes.verifyCode,
-      page: () => const verifyCode(),
+      name: AppRoutes.verifyEmail,
+      page: () => const verifyEmail(),
       binding: ForgotPassBinding(),
+    ),
+    GetPage(
+    name: AppRoutes.userverification,
+    page: () => UserVerification(),
+    binding: SignupOnboardingBinding(),
     ),
     GetPage(
       name: AppRoutes.resetPassword,
@@ -83,9 +88,7 @@ class AppPages {
       //binding: ClientRootBinding(),
 
     ),
-    GetPage(
-      name: AppRoutes.userverification,
-      page: () => UserVerification())
+  
     
   
   ];
