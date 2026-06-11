@@ -1,3 +1,5 @@
+import 'package:storex/features/auth/views/login/verify_email.dart';
+
 class AppRoutes {
   static const onboarding = '/onboarding';
   static const login = '/login';
@@ -6,7 +8,7 @@ class AppRoutes {
   static const workerSignup = '/workerSignup';
   static const signupOnboarding = '/signupOnboarding';
   static const forgotPassword = '/forgotPassword';
-  static const verifyCode = '/verifyCode';
+  static const verifyEmail = '/verifyEmail';
   static const clientRoot = '/clientRoot';
   static const clientHome = '/clientHome';
   static const resetPassword = '/resetPassword';

@@ -1,15 +1,17 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:storex/features/auth/controllers/forgot_pass_controller.dart';
+import 'package:storex/features/auth/controllers/user_verification_controller.dart';
 import 'package:storex/widgets/custom_textfield.dart';
 import 'package:storex/widgets/primary_button.dart';
 import 'package:storex/widgets/app_snackbar.dart';
 
 class EmailBottomSheet {
-  final controller = Get.find<ForgotPassController>();
+  // final controller = Get.find<ForgotPassController>();
   //static method so it can be called easily
-  static void show(BuildContext context, ForgotPassController controller, ThemeData theme) {
-    controller.emailController.text = controller.email.value;
+  static void show(BuildContext context, dynamic controller, ThemeData theme) {
+    final TextEditingController emailController = TextEditingController(text: controller.email.value);
+    final bool isSignupVerification = controller is UserVerificationController;
 
     Get.bottomSheet(
       Container(
@@ -53,29 +55,18 @@ class EmailBottomSheet {
               ),
               const SizedBox(height: 20),
               CustomTextField(
-                controller: controller.emailController,
+                controller: emailController,
                 keyboardType: TextInputType.emailAddress,
                 label: "New Email Address".tr,
                 hint: "Enter your email".tr,
                 // prefixIcon: const Icon(Icons.email_outlined),
               ),
-              // TextField(
-              //   controller: controller.emailController,
-              //   keyboardType: TextInputType.emailAddress,
-              //   decoration: InputDecoration(
-              //     labelText: "New Email Address".tr,
-              //     hintText: "Enter your email".tr,
-              //     border: OutlineInputBorder(
-              //       borderRadius: BorderRadius.circular(12),
-              //     ),
-              //     prefixIcon: const Icon(Icons.email_outlined),
-              //   ),
-              // ),
+             
               const SizedBox(height: 25),
               PrimaryButton(
                 text: "Update & Resend Code".tr,
-                onPressed: () {
-                  String inputEmail = controller.emailController.text.trim();
+                onPressed: () async {
+                  String inputEmail = emailController.text.trim();
                   
                   if (inputEmail.isEmpty || !GetUtils.isEmail(inputEmail)) {
                     AppSnackbar.show(
@@ -86,7 +77,7 @@ class EmailBottomSheet {
                     return;
                   }
                   
-                  controller.changeEmail(inputEmail);
+                  // controller.changeEmail(inputEmail);
                   Get.back(); 
                   
                   AppSnackbar.show(
@@ -94,6 +85,14 @@ class EmailBottomSheet {
                     message: "A new code has been sent successfully!".tr,
                     icon: Icons.check_circle_outline,
                   );
+                  if (isSignupVerification) {
+                    // Triggers the signup profile mutation & persistence logic
+                    await (controller as UserVerificationController).changeEmail(inputEmail);
+                  } else if (controller is ForgotPassController) {
+                    // Triggers the password reset verification email link dispatch logic
+                    //NOT DONE YET
+                    // controller.updateEmailAndResend(inputEmail);
+                  }
                 },
               ),
             ],

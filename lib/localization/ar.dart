@@ -34,6 +34,7 @@ const Map<String, String> ar = {
    'Enter Email or Phone number':'ادخل البريد الالكتروني أو رقم الهاتف',
    "Enter your email address":'ادخل عنوان بريدك الإلكتروني',
    'Enter your password':'ادخل كلمة المرور',
+   "Enter your national ID": 'ادخل رقمك الوطني',
    "Enter your new password": 'ادخل كلمة المرور الجديدة',
    "Error": 'خطأ',
   
@@ -42,7 +43,7 @@ const Map<String, String> ar = {
    "Enter your business name":"أدخل اسم النشاط التجاري",
    "Enter your email":'ادخل بريدك الالكتروني',
    "Enter your first name":'ادخل اسمك الأول',
-   "Enter your last name":'ادخل اسمك الأخير',
+   "Enter your last name":'ادخل اسمك الأخير:',
    "Exit signup?":'الخروج من انشاء الحساب؟',
    "Exit":'الخروج',
   //F
@@ -65,11 +66,13 @@ const Map<String, String> ar = {
   //L
    "Live Analytics": "تحليلات مباشرة",
    'Login': 'تسجيل الدخول',
-   "Last Name:":"اسمك الأخير",
+   "Last Name:":"اسمك الأخير:",
   //M
    "Manage warehouses, storage, and incoming orders":
       "إدارة المستودعات والتخزين والطلبات الواردة",
   //N
+   "National ID:": "الرقم الوطني:",
+   'National ID must be exactly 10 digits': 'يجب أن يكون الرقم الوطني مكونًا من 10 أرقام بالضبط',
    "New Email Address": "عنوان البريد الإلكتروني الجديد",
    "New Password": "كلمة مرور جديدة",
    "Name must be at least 2 characters": "يجب أن يكون الاسم على الأقل 2 أحرف",
@@ -85,11 +88,11 @@ const Map<String, String> ar = {
    'Please confirm your password':'يرجى تأكيد كلمة المرور',
    "Please check your spam folder if you can't find it.":'يرجى التحقق من مجلد الرسائل غير المرغوب فيها إذا لم تتمكن من العثور عليه.',
    "Please ensure your password meets the requirements and both fields match.": 'يرجى التأكد من أن كلمة المرور تلبي المتطلبات وأن كلا الحقلين متطابقين.',
+   'Please Enter Email or Phone number':'يرجى إدخال البريد الإلكتروني أو رقم الهاتف',
    "Please Enter a valid email address.":'يرجى إدخال بريد إلكتروني صالح.',
    'Please Enter Phone Number': 'يرجى إدخال رقم الهاتف',
    'Please Enter The Password':'يرجى ادخال كلمة المرور',
    "Please enter the complete code": 'يرجى إدخال الرمز الكامل',
-   "Please enter the 4-digit code sent to your email.":'يرجى إدخال رمز التحقق المكون من 4 أرقام الذي تم إرساله إلى بريدك الإلكتروني.',
    'Please enter the verification code':'يرجى إدخال رمز التحقق',
    'Please Enter Your Name':'يرجى ادخال الاسم',
    'Please Enter your Email':'يرجى ادخال البريد الالكتروني',

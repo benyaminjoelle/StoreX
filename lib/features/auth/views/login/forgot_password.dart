@@ -83,7 +83,7 @@ class ForgotPassword extends StatelessWidget {
                        if (controller.formKey.currentState!.validate()){
                         controller.email.value = controller.emailController.text.trim();
                         //  controller.sendVerificationEmail();
-                        Get.toNamed(AppRoutes.verifyCode);
+                        Get.toNamed(AppRoutes.verifyEmail);
                     }
                     else{
                       AppSnackbar.show(

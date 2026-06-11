@@ -6,8 +6,8 @@ import 'package:storex/features/auth/widgets/change_email.dart';
 import 'package:storex/widgets/back_button.dart';
 import 'package:storex/widgets/primary_button.dart';
 
-class verifyCode extends StatelessWidget{
-  const verifyCode({super.key});
+class verifyEmail extends StatelessWidget{
+  const verifyEmail({super.key});
 
   @override
   Widget build(BuildContext context) {

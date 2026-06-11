@@ -105,7 +105,7 @@ class ClientSignupView extends StatelessWidget {
                                   ),
 
                                   SizedBox(height: media.size.height * 0.03),
- CustomTextField(
+                                  CustomTextField(
                                     controller: controller.businessNameController,
                                     label: "Business Name:".tr,
                                     hint: "Enter your Business name".tr,
@@ -178,13 +178,15 @@ class ClientSignupView extends StatelessWidget {
                                   SizedBox(height: media.size.height * 0.04),
 
                                   /// BUTTON
+                                 Obx(()=>
                                   PrimaryButton(
                                     text: "Continue".tr,
+                                    isLoading: controller.isLoading.value,
                                     onPressed: () {
                                       controller.continueToVerify();
-                                   
                                     },
                                   ),
+                                 ),
 
                                   Row(
                                     mainAxisAlignment: MainAxisAlignment.center,

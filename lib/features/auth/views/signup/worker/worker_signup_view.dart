@@ -8,6 +8,7 @@ import 'package:storex/core/utils/validators.dart';
 import 'package:storex/features/auth/controllers/worker_signup_controller.dart';
 
 import 'package:storex/features/auth/widgets/signup_header.dart';
+import 'package:storex/widgets/app_snackbar.dart';
 
 import 'package:storex/widgets/back_button.dart';
 import 'package:storex/widgets/custom_textfield.dart';
@@ -88,8 +89,8 @@ class WorkerSignupView extends StatelessWidget {
                                   /// FIRST NAME
                                   CustomTextField(
                                     controller: controller.firstNameController,
-                                    label: "First Name".tr,
-                                    hint: "Enter first name".tr,
+                                    label: "First Name:".tr,
+                                    hint: "Enter your first name".tr,
                                     textInputAction: TextInputAction.next,
                                     validator: Validators.nameValidation,
                                   ),
@@ -99,8 +100,8 @@ class WorkerSignupView extends StatelessWidget {
                                   /// LAST NAME
                                   CustomTextField(
                                     controller: controller.lastNameController,
-                                    label: "Last Name".tr,
-                                    hint: "Enter last name".tr,
+                                    label: "Last Name:".tr,
+                                    hint: "Enter your last name".tr,
                                     textInputAction: TextInputAction.next,
                                     validator: Validators.nameValidation,
                                   ),
@@ -110,10 +111,10 @@ class WorkerSignupView extends StatelessWidget {
                                   // /// BUSINESS NAME
                                   CustomTextField(
                                     controller: controller.natinalIdController,
-                                    label: "National ID".tr,
+                                    label: "National ID:".tr,
                                     hint: "Enter your national ID".tr,
                                     textInputAction: TextInputAction.next,
-                                    validator: Validators.nameValidation,
+                                    validator: Validators.nationalIdValidation,
                                   ),
 
                                   SizedBox(height: media.size.height * 0.03),
@@ -121,7 +122,7 @@ class WorkerSignupView extends StatelessWidget {
                                   /// EMAIL
                                   CustomTextField(
                                     controller: controller.emailController,
-                                    label: "Business Email".tr,
+                                    label: "Business Email:".tr,
                                     hint: "Enter your business email".tr,
                                     keyboardType: TextInputType.emailAddress,
                                     textInputAction: TextInputAction.next,
@@ -133,8 +134,8 @@ class WorkerSignupView extends StatelessWidget {
                                   /// PHONE
                                   CustomTextField(
                                     controller: controller.phoneController,
-                                    label: "Business Phone".tr,
-                                    hint: "+963",
+                                    label: "Business phone number:".tr,
+                                    hint: "+963 xxx-xxx-xxx",
                                     keyboardType: TextInputType.phone,
                                     textInputAction: TextInputAction.next,
                                     validator: Validators.phoneValidation,
@@ -186,13 +187,21 @@ class WorkerSignupView extends StatelessWidget {
                                   SizedBox(height: media.size.height * 0.04),
 
                                   /// BUTTON
-                                  PrimaryButton(
+                                 Obx(()=>
+                                 PrimaryButton(
                                     text: "Continue".tr,
+                                    isLoading: controller.isLoading.value,
                                     onPressed: () {
-                                      controller.validateWorker();
-                                      Get.toNamed('/userverifcation');
+                                      controller.continueToVerify();
+                                      AppSnackbar.show(
+                                        title: "Success".tr,
+                                        message: "Account registered successfully!".tr,
+                                        icon: Icons.check_circle_outline,
+                                      );
+                                      Get.toNamed('/userverification');
                                     },
                                   ),
+                                  ), 
 
                                   Row(
                                     mainAxisAlignment: MainAxisAlignment.center,
